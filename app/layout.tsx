@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import MainHeader from "@/components/header/MainHeader";
 
 export const metadata: Metadata = {
   title: "پنل آموزشی فرتاک سنجش فناوری پیشرو",
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body>
+        <MainHeader/>
         {children}
       </body>
     </html>
