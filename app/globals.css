@@ -166,4 +166,5 @@
 body{
   direction: rtl;
   font-family: 'Noora';
+  transition: .5s;
 }

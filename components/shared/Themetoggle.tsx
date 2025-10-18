@@ -1,10 +1,26 @@
-import React from "react";
+"use client"
+import React, { useEffect } from "react";
 import "../../styles/themeToggle.css";
+import useTheme from "@/stores/useTheme";
 
 function Themetoggle() {
+
+  const darkMode = useTheme((state) => state.darkMode)
+  const toggleTheme = useTheme((state) => state.toggleTheme)
+
+  useEffect(()=>{
+
+    if (darkMode){
+      document.documentElement.classList.add('dark')
+    } else{
+      document.documentElement.classList.remove('dark')
+    }
+
+  },[darkMode])
+
   return (
     <label className="switch">
-      <input defaultChecked id="checkbox" type="checkbox" />
+      <input checked={!darkMode} onChange={toggleTheme} id="checkbox" type="checkbox" />
       <span className="slider">
         <div className="star star_1"></div>
         <div className="star star_2"></div>
