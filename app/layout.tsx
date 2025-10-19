@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import MainHeader from "@/components/header/MainHeader";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "پنل آموزشی فرتاک سنجش فناوری پیشرو",
@@ -13,10 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa">
+    <html lang="fa" suppressHydrationWarning>
       <body>
-        <MainHeader/>
-        {children}
+        <ThemeProvider attribute={'class'} >
+          <MainHeader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
