@@ -6,7 +6,7 @@ import Themetoggle from "../shared/Themetoggle";
 
 function MainHeader() {
   return (
-    <header className="p-4 md:px-7 z-10 bg-white dark:bg-black fixed w-full flex justify-between items-center border-b border-border">
+    <header className="p-4 md:px-7 z-10 bg-white dark:bg-black fixed w-full flex justify-between items-center border-b border-border transition-all duration-300">
       <div className="pr-6 md:pr-20">
         <Logo width="160px" />
       </div>

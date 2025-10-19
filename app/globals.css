@@ -166,23 +166,13 @@
 body{
   direction: rtl;
   font-family: 'Noora';
-  transition: .5s;
+}
+
+body,h1,h2,h3,h4,h5,h6,div,input{
+  transition: all ease-in-out .2s;
 }
 
 h1{
   font-family: 'Noora';
   font-weight: 500;
-}
-
-@keyframes spin-slow {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 10s linear infinite;
 }
