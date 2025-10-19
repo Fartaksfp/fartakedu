@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 
 function Hero() {
   return (
-    <section className="relative w-full h-full">
+    <div className="relative w-full h-full">
       <HeroImage />
 
       {/* overlay */}
@@ -24,7 +24,7 @@ function Hero() {
           </Button>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
