@@ -20,12 +20,10 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import Themetoggle from "../shared/Themetoggle";
 
 const navbarItems = [
   { name: "صفحه اصلی", href: "/", icon: "house" },
@@ -50,13 +48,13 @@ function Navbar() {
             {navbarItems.map((item, index) => {
               const IconComponent = iconsMap[item.icon];
               return (
-                <NavigationMenuItem key={index}>
+                <NavigationMenuItem  key={index}>
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="flex flex-row-reverse items-center gap-2 cursor-pointer hover:text-primary transition"
+                      className="flex flex-row-reverse items-center gap-2 cursor-pointer hover:text-white transition"
                     >
-                      <IconComponent className="!w-5 !h-5" />
+                      <IconComponent className="!w-5 !h-5 hover:text-white" />
                       <span className="text-lg">{item.name}</span>
                     </Link>
                   </NavigationMenuLink>

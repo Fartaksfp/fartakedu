@@ -64,7 +64,7 @@
   --muted: oklch(0.93 0.05 145);
   --muted-foreground: oklch(0.45 0.05 145);
 
-  --accent: oklch(0.9 0.1 145);
+  --accent: oklch(74.808% 0.21043 143.13);
   --accent-foreground: oklch(0.2 0 0);
 
   --destructive: oklch(0.6 0.25 27);
@@ -167,4 +167,22 @@ body{
   direction: rtl;
   font-family: 'Noora';
   transition: .5s;
+}
+
+h1{
+  font-family: 'Noora';
+  font-weight: 500;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
 }

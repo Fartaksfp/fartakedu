@@ -1,3 +1,13 @@
-export default function Home() {
-  return <div className="flex justify-center w-full  text-8xl"></div>;
+import Hero from "@/components/home/Hero";
+
+function Home() {
+  return (
+    <>
+      <div className="h-dvh">
+        <Hero />
+      </div>
+    </>
+  );
 }
+
+export default Home;
