@@ -48,7 +48,7 @@ function Navbar() {
             {navbarItems.map((item, index) => {
               const IconComponent = iconsMap[item.icon];
               return (
-                <NavigationMenuItem  key={index}>
+                <NavigationMenuItem key={index}>
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
