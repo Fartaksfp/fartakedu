@@ -5,6 +5,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { House, BookOpen, Pencil, Phone } from "lucide-react";
+import Link from "next/link";
 
 const navbarItems = [
   { name: "صفحه اصلی", href: "/", icon: "house" },
@@ -28,9 +29,14 @@ function Navbar() {
           const IconComponent = iconsMap[item.icon];
           return (
             <NavigationMenuItem key={index}>
-              <NavigationMenuLink className="flex flex-row-reverse items-center gap-2 cursor-pointer text-lg ">
-                <IconComponent className="!w-5 !h-5" />
-                <span>{item.name}</span>
+              <NavigationMenuLink asChild>
+                <Link
+                  href={item.href}
+                  className="flex flex-row-reverse items-center gap-2 cursor-pointer"
+                >
+                  <IconComponent className="!w-5 !h-5" />
+                  <span className="text-lg">{item.name}</span>
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           );
