@@ -30,7 +30,7 @@ function RotatingCylinder() {
 
   return (
     <div
-      className="overflow-hidden h-[3rem] flex mx-2 -mt-1 transition-all duration-700 items-start justify-center"
+      className="overflow-hidden h-[3rem] my-5 sm:my-0 flex mx-2 sm:-mt-1 transition-all duration-700 items-start justify-center"
       style={{ width: itemWidth + 'px' }}
     >
       <div
@@ -40,7 +40,7 @@ function RotatingCylinder() {
         {courses.map((course, i) => (
           <div
             key={i}
-            className="h-[3rem] whitespace-nowrap flex items-center justify-center text-yellow-400 text-3xl font-bold"
+            className="h-[3rem] whitespace-nowrap flex items-center justify-center text-yellow-400 text-3xl font-bold "
           >
             {course}
           </div>
