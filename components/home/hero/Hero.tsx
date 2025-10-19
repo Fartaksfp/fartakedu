@@ -1,7 +1,7 @@
-import HeroText from "./HeroText";
+import HeroText from "../hero/HeroText";
 import HeroImage from "./HeroImage";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { Search } from "lucide-react";
 
 function Hero() {
