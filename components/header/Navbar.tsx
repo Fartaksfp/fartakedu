@@ -1,11 +1,31 @@
+"use client";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { House, BookOpen, Pencil, Phone } from "lucide-react";
+import {
+  House,
+  BookOpen,
+  Pencil,
+  Phone,
+  Menu,
+  ChevronLeft,
+  User,
+} from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import Themetoggle from "../shared/Themetoggle";
 
 const navbarItems = [
   { name: "صفحه اصلی", href: "/", icon: "house" },
@@ -23,26 +43,69 @@ const iconsMap = {
 
 function Navbar() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList className="flex flex-row-reverse">
-        {navbarItems.map((item, index) => {
-          const IconComponent = iconsMap[item.icon];
-          return (
-            <NavigationMenuItem key={index}>
-              <NavigationMenuLink asChild>
-                <Link
-                  href={item.href}
-                  className="flex flex-row-reverse items-center gap-2 cursor-pointer"
-                >
-                  <IconComponent className="!w-5 !h-5" />
-                  <span className="text-lg">{item.name}</span>
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          );
-        })}
-      </NavigationMenuList>
-    </NavigationMenu>
+    <>
+      <div className="hidden md:flex">
+        <NavigationMenu>
+          <NavigationMenuList className="flex flex-row-reverse gap-4">
+            {navbarItems.map((item, index) => {
+              const IconComponent = iconsMap[item.icon];
+              return (
+                <NavigationMenuItem key={index}>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={item.href}
+                      className="flex flex-row-reverse items-center gap-2 cursor-pointer hover:text-primary transition"
+                    >
+                      <IconComponent className="!w-5 !h-5" />
+                      <span className="text-lg">{item.name}</span>
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              );
+            })}
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
+
+      <div className="md:hidden">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon">
+              <Menu className="w-6 h-6" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="bg-background">
+            <SheetHeader>
+              <SheetTitle className="mt-10">فهرست</SheetTitle>
+            </SheetHeader>
+            <div className="flex flex-col -mt-10 gap-6">
+              <div className=""></div>
+              {navbarItems.map((item, index) => {
+                const IconComponent = iconsMap[item.icon];
+                return (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className="flex flex-row mr-5 items-center gap-3 text-lg hover:text-primary transition"
+                  >
+                    <IconComponent className="!w-5 !h-5" />
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+            <Button
+              variant={"outline"}
+              className="flex flex-row-reverse mx-10 items-center gap-1 text-sm md:text-base"
+            >
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+              <User className="w-4 h-4 md:w-5 md:h-5" />
+              <span>ورود | ثبت نام</span>
+            </Button>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </>
   );
 }
 

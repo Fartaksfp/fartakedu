@@ -1,28 +1,36 @@
-import { ChevronLeft, User } from "lucide-react"
-import Logo from "../Logo"
-import { Button } from "../ui/button"
-import Navbar from "./Navbar"
-import Themetoggle from "../shared/Themetoggle"
+import { ChevronLeft, User } from "lucide-react";
+import Logo from "../Logo";
+import { Button } from "../ui/button";
+import Navbar from "./Navbar";
+import Themetoggle from "../shared/Themetoggle";
 
 function MainHeader() {
   return (
-    <div className="p-7 flex justify-between">
-      <div className="pr-20">
-        <Logo width="200px" />
+    <header className="p-4 md:p-7 flex justify-between items-center border-b border-border">
+      <div className="pr-6 md:pr-20">
+        <Logo width="160px" />
       </div>
-      <div>
-        <Navbar/>
+
+      <div className="flex items-center gap-4">
+        <div className="sm:hidden">
+        <Themetoggle />
+        </div>
+        <Navbar />
       </div>
-      <div className="flex flex-row-reverse gap-5 pl-20">
-        <Button variant={"outline"}>
+
+      <div className="sm:flex flex-row-reverse items-center gap-3 md:gap-5 pl-4 md:pl-20 hidden">
+        <Button
+          variant={"outline"}
+          className="flex flex-row-reverse items-center gap-1 text-sm md:text-base"
+        >
+          <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+          <User className="w-4 h-4 md:w-5 md:h-5" />
           <span>ورود | ثبت نام</span>
-          <User/>
-          <ChevronLeft/>
         </Button>
-        <Themetoggle/>
+        <Themetoggle />
       </div>
-    </div>
-  )
+    </header>
+  );
 }
 
-export default MainHeader
+export default MainHeader;
