@@ -22,7 +22,7 @@ function BenefitCard({
   const IconComponent = iconsMap[icon];
 
   return (
-    <div className="flex flex-col items-center justify-center backdrop-blur-md rounded-2xl p-5 w-36 sm:w-full hover:scale-105 transition-transform duration-300 shadow-lg dark:bg-gray-900">
+    <div className="flex flex-col items-center justify-center backdrop-blur-md rounded-2xl p-5 w-full hover:scale-105 transition-transform duration-300 shadow-lg dark:bg-gray-900">
       <div className="w-15 h-15 flex items-center justify-center bg-accent/30 rounded-full mb-3">
         {IconComponent && <IconComponent className="w-8 h-8 text-primary" />}
       </div>
