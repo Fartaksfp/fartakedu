@@ -1,4 +1,7 @@
 import CourseCard from "@/components/shared/CourseCard";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const courses = [
@@ -46,14 +49,21 @@ function FeaturedCourses() {
       <div className="flex flex-col items-center">
         <h1>دوره های محبوب</h1>
         <p className="text-center">
-            محبوب ترین دوره هایی که توسط متخصصان صنعت برگزار شده اند.
+          محبوب ترین دوره هایی که توسط متخصصان صنعت برگزار شده اند.
         </p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
-      {courses.map((course, index) => (
-        <CourseCard key={index} course={course} />
-      ))}
-
+        {courses.map((course, index) => (
+          <CourseCard key={index} course={course} />
+        ))}
+      </div>
+      <div>
+        <Link href={'/courses'}>
+        <Button variant={"outline"} className="flex items-center gap-2">
+          <span>مشاهده تمام دوره ها</span>
+          <ArrowLeft />
+        </Button>
+        </Link>
       </div>
     </div>
   );
