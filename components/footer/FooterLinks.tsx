@@ -31,7 +31,7 @@ function FooterLinks() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
       {linkCategories.map((category) => (
-        <div key={category.title} className="flex flex-col gap-2">
+        <div key={category.title} className="flex flex-col justify-center items-center gap-2">
           <h4 className="font-semibold mb-2">{category.title}</h4>
           {category.links.map((link) => (
             <Link

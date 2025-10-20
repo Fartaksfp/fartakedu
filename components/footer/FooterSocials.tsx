@@ -15,7 +15,13 @@ function FooterSocials() {
         {socials.map((social, i) => {
           const Icon = social.icon;
           return (
-            <a key={i} href={social.href} target="_blank" rel="noopener noreferrer" className="hover:text-white text-gray-400 transition-colors">
+            <a
+              key={i}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white text-gray-400 transition-colors"
+            >
               <Icon size={20} />
             </a>
           );
