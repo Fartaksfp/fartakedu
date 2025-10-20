@@ -2,6 +2,37 @@ import Benefits from "@/components/home/benefits/Benefits";
 import LastCta from "@/components/home/cta/LastCta";
 import FeaturedCourses from "@/components/home/featuredCourses/FeaturedCourses";
 import Hero from "@/components/home/hero/Hero";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "فرتاک آکادمی | آموزش آنلاین مهارت‌های روز",
+  description:
+    "در فرتاک آکادمی به بهترین دوره‌های آنلاین دسترسی پیدا کنید و مهارت‌های خود را در حوزه‌های مختلف ارتقا دهید.",
+  keywords: [
+    "فرتاک آکادمی",
+    "دوره آنلاین",
+    "آموزش آنلاین",
+    "مهارت‌های دیجیتال",
+  ],
+  authors: [{ name: "فرتاک آکادمی" }],
+  openGraph: {
+    title: "فرتاک آکادمی | آموزش آنلاین مهارت‌های روز",
+    description:
+      "در فرتاک آکادمی به بهترین دوره‌های آنلاین دسترسی پیدا کنید و مهارت‌های خود را در حوزه‌های مختلف ارتقا دهید.",
+    url: "https://academy.fartaksfp.com",
+    siteName: "فرتاک آکادمی",
+    images: [
+      {
+        url: "https://academy.fartaksfp.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "فرتاک آکادمی - آموزش آنلاین",
+      },
+    ],
+    locale: "fa_IR",
+    type: "website",
+  },
+};
 
 function Home() {
   return (
@@ -10,15 +41,14 @@ function Home() {
         <Hero />
       </section>
       <section className="w-[90%] sm:w-4/5 flex justify-center mx-auto">
-        <Benefits/>
+        <Benefits />
       </section>
       <section className="w-[90%] sm:w-4/5 flex justify-center mx-auto">
-        <FeaturedCourses/>
+        <FeaturedCourses />
       </section>
       <section className="w-full transition-all duration-300 dark:bg-green-800 bg-primary flex justify-center mx-auto">
-        <LastCta/>
+        <LastCta />
       </section>
-
     </main>
   );
 }
