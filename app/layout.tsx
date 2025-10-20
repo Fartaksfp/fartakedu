@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import MainHeader from "@/components/header/MainHeader";
 import { ThemeProvider } from "next-themes";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "پنل آموزشی فرتاک سنجش فناوری پیشرو",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <ThemeProvider attribute={'class'} defaultTheme="light" >
           <MainHeader />
           {children}
+          <Footer/>
         </ThemeProvider>
       </body>
     </html>
