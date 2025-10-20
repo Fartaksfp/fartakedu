@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="fa" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute={'class'} >
+        <ThemeProvider attribute={'class'} defaultTheme="light" >
           <MainHeader />
           {children}
         </ThemeProvider>
