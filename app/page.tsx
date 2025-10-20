@@ -15,7 +15,7 @@ function Home() {
       <section className="w-[90%] sm:w-4/5 flex justify-center mx-auto">
         <FeaturedCourses/>
       </section>
-      <section className="w-full dark:bg-green-800 bg-primary flex justify-center mx-auto">
+      <section className="w-full transition-all duration-300 dark:bg-green-800 bg-primary flex justify-center mx-auto">
         <LastCta/>
       </section>
 
