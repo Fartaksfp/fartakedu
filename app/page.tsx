@@ -1,4 +1,5 @@
 import Benefits from "@/components/home/benefits/Benefits";
+import LastCta from "@/components/home/cta/LastCta";
 import FeaturedCourses from "@/components/home/featuredCourses/FeaturedCourses";
 import Hero from "@/components/home/hero/Hero";
 
@@ -14,8 +15,8 @@ function Home() {
       <section className="w-[90%] sm:w-4/5 flex justify-center mx-auto">
         <FeaturedCourses/>
       </section>
-      <section>
-        
+      <section className="w-full bg-primary flex justify-center mx-auto">
+        <LastCta/>
       </section>
 
     </main>
