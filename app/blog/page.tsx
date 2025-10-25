@@ -38,12 +38,12 @@ function page() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map(post => (
-          <div key={post.id} className="bg-white rounded-lg shadow hover:shadow-xl transition overflow-hidden">
+          <div key={post.id} className="bg-white dark:bg-slate-950 rounded-lg shadow hover:shadow-xl transition overflow-hidden">
             <Image src={post.image} width={200} height={200} alt={post.title} className="w-full h-48 object-cover" />
             <div className="p-6">
               <span className="text-sm text-blue-600 font-medium">{post.category}</span>
               <h3 className="text-xl font-semibold mt-2 mb-3">{post.title}</h3>
-              <p className="text-gray-600 mb-4">{post.excerpt}</p>
+              <p className="text-gray-600 dark:text-white mb-4">{post.excerpt}</p>
               <p className="text-gray-400 text-sm">{post.date}</p>
               <Link href="#" className="mt-4 inline-block text-blue-600">
               <Button>ادامه مطلب <ChevronLeft className="-mt-0.5"/></Button>

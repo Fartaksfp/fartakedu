@@ -26,6 +26,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { usePathname } from "next/navigation";
 
 const navbarItems = [
   { name: "صفحه اصلی", href: "/", icon: "house" },
@@ -42,9 +43,12 @@ const iconsMap = {
 };
 
 function Navbar() {
+
+  const pathName = usePathname()
+
   return (
     <>
-      <div className="hidden md:flex">
+      <div className="hidden xl:flex">
         <NavigationMenu>
           <NavigationMenuList className="flex flex-row-reverse gap-4">
             {navbarItems.map((item, index) => {
@@ -54,10 +58,10 @@ function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="flex flex-row-reverse items-center gap-2 cursor-pointer hover:text-white transition"
+                      className={`${pathName === item.href ? 'bg-primary/80 text-white' : null} flex flex-row-reverse items-center gap-2 cursor-pointer hover:text-white transition focus:text-white focus:bg-primary/80`}
                     >
                       <IconComponent className="!w-5 !h-5 hover:text-white" />
-                      <span className="text-lg">{item.name}</span>
+                      <span className="text-sm xl:text-lg">{item.name}</span>
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -67,7 +71,7 @@ function Navbar() {
         </NavigationMenu>
       </div>
 
-      <div className="md:hidden">
+      <div className="xl:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon">

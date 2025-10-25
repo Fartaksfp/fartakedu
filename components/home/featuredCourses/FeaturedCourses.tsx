@@ -52,7 +52,7 @@ function FeaturedCourses() {
           محبوب ترین دوره هایی که توسط متخصصان صنعت برگزار شده اند.
         </p>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
         {courses.map((course, index) => (
           <CourseCard key={index} course={course} />
         ))}
