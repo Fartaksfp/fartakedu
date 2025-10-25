@@ -1,7 +1,7 @@
 import React from "react";
 import FooterLinks from "./FooterLinks";
 import FooterSocials from "./FooterSocials";
-import Logo from "../Logo";
+import Logo from "../shared/Logo";
 
 function Footer() {
   return (

@@ -2,8 +2,6 @@
 
 import {
   NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 
@@ -26,7 +24,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { usePathname } from "next/navigation";
+import NavItem from "./NavItem";
 
 const navbarItems = [
   { name: "صفحه اصلی", href: "/", icon: "house" },
@@ -44,27 +42,14 @@ const iconsMap = {
 
 function Navbar() {
 
-  const pathName = usePathname()
-
   return (
     <>
       <div className="hidden xl:flex">
         <NavigationMenu>
           <NavigationMenuList className="flex flex-row-reverse gap-4">
             {navbarItems.map((item, index) => {
-              const IconComponent = iconsMap[item.icon];
               return (
-                <NavigationMenuItem key={index}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href={item.href}
-                      className={`${pathName === item.href ? 'bg-primary/80 text-white' : null} flex flex-row-reverse items-center gap-2 cursor-pointer hover:text-white transition focus:text-white focus:bg-primary/80`}
-                    >
-                      <IconComponent className="!w-5 !h-5 hover:text-white" />
-                      <span className="text-sm xl:text-lg">{item.name}</span>
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
+                <NavItem key={index} item={item}/>
               );
             })}
           </NavigationMenuList>
