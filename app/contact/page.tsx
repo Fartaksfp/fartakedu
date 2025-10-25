@@ -11,7 +11,7 @@ import React from "react";
 function Page() {
   return (
     <div className="container mx-auto py-30 px-4 flex flex-col lg:flex-row justify-center gap-8">
-      <div className="w-full lg:w-1/3 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-3xl shadow-md p-8 flex flex-col justify-center">
+      <div className="animate-in slide-in-from-bottom-20 fade-in duration-300 w-full lg:w-1/3 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-3xl shadow-md p-8 flex flex-col justify-center">
         <h2 className="font-bold mb-6 text-3xl text-slate-800 dark:text-slate-100 text-center">
           به ما پیام بدهید
         </h2>
@@ -30,7 +30,7 @@ function Page() {
         </form>
       </div>
 
-      <div className="w-full lg:w-2/3 flex flex-col gap-6 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-3xl shadow-md p-8">
+      <div className="w-full animate-in slide-in-from-bottom-20 fade-in duration-300 lg:w-2/3 flex flex-col gap-6 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-3xl shadow-md p-8">
         <div className="flex items-center gap-3 text-slate-800 dark:text-slate-100">
           <Phone size={22} className="text-blue-600" />
           <span className="font-semibold text-lg">تلفن : 09050948319</span>
@@ -77,7 +77,7 @@ function Page() {
           </div>
         </div>
 
-        <div className="h-[370px] w-full overflow-hidden rounded-2xl border border-slate-300 dark:border-slate-700">
+        <div className="h-[370px]  w-full overflow-hidden rounded-2xl border border-slate-300 dark:border-slate-700">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.8076509072557!2d51.81979989474968!3d35.73094880351971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f91da3b9eab7f37%3A0x760e3208661867e1!2z2YHYsdiq2KfaqSDYs9mG2KzYtCDZgdmG2KfZiNix24wg2b7bjNi02LHZiA!5e0!3m2!1sen!2s!4v1761385438025!5m2!1sen!2s"
             width="100%"
