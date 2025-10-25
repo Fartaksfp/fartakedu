@@ -10,7 +10,7 @@ const items = [
 
 function Benefits() {
   return (
-    <div className='w-full grid grid-cols-2 sm:grid-cols-4 gap-5'>
+    <div className='w-full grid grid-cols-2 lg:grid-cols-4 gap-5'>
       {items.map((item, index)=> (
         <BenefitCard key={index} name={item.name} number={item.number} icon={item.icon}/>
       ))}
