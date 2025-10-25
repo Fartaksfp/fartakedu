@@ -1,5 +1,5 @@
 import { ChevronLeft, User } from "lucide-react";
-import Logo from "../Logo";
+import Logo from "../shared/Logo";
 import { Button } from "../ui/button";
 import Navbar from "./Navbar";
 import Themetoggle from "../shared/Themetoggle";
