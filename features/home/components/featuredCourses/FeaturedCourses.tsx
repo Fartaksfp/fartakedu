@@ -9,9 +9,9 @@ const courses = [
     name: "پرامپت نویسی در هوش مصنوعی",
     description:
       "آموزش نحوه نوشتن پرامپت‌های حرفه‌ای برای ابزارهایی مثل ChatGPT و Midjourney.",
-    duration: 8, // ساعت
+    duration: 8, 
     students: 18,
-    price: 890000, // تومان
+    price: 890000, 
     image: "/images/courses/prompt.jpg",
   },
   {

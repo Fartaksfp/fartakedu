@@ -1,8 +1,8 @@
-import HeroText from "../hero/HeroText";
+import HeroText from "./HeroText";
 import HeroImage from "./HeroImage";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
 import { Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 function Hero() {
   return (

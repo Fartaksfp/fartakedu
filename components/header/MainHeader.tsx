@@ -2,7 +2,7 @@ import { ChevronLeft, User } from "lucide-react";
 import Logo from "../shared/Logo";
 import { Button } from "../ui/button";
 import Navbar from "./Navbar";
-import Themetoggle from "../shared/Themetoggle";
+import Themetoggle from "../shared/Themetoggle/Themetoggle";
 
 function MainHeader() {
   return (
