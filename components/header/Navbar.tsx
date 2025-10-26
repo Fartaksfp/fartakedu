@@ -19,6 +19,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -41,16 +42,13 @@ const iconsMap = {
 };
 
 function Navbar() {
-
   return (
     <>
       <div className="hidden xl:flex">
         <NavigationMenu>
           <NavigationMenuList className="flex flex-row-reverse gap-4">
             {navbarItems.map((item, index) => {
-              return (
-                <NavItem key={index} item={item}/>
-              );
+              return <NavItem key={index} item={item} />;
             })}
           </NavigationMenuList>
         </NavigationMenu>
@@ -72,14 +70,15 @@ function Navbar() {
               {navbarItems.map((item, index) => {
                 const IconComponent = iconsMap[item.icon];
                 return (
-                  <Link
-                    key={index}
-                    href={item.href}
-                    className="flex flex-row mr-5 items-center gap-3 text-lg hover:text-primary transition"
-                  >
-                    <IconComponent className="!w-5 !h-5" />
-                    {item.name}
-                  </Link>
+                  <SheetClose asChild key={index}>
+                    <Link
+                      href={item.href}
+                      className="flex flex-row mr-5 items-center gap-3 text-lg hover:text-primary transition"
+                    >
+                      <IconComponent className="!w-5 !h-5" />
+                      {item.name}
+                    </Link>
+                  </SheetClose>
                 );
               })}
             </div>
