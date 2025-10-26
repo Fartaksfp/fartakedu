@@ -1,8 +1,8 @@
-import CourseType from "@/types/course";
+import { Button } from "@/components/ui/button";
+import CourseType from "@/features/courses/types/course";
 import { ChevronLeft, Clock, Users } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { Button } from "../ui/button";
 
 function CourseCard({ course }: { course: CourseType }) {
   return (
@@ -31,7 +31,7 @@ function CourseCard({ course }: { course: CourseType }) {
           </div>
         </div>
         <div className="flex w-full justify-between items-center">
-          <div className="flex flex-col sm:flex-row gap-3 w-full pt-4 sm:py-4 justify-between items-center border-t border-gray-200">
+          <div className="flex sm:flex-row gap-3 w-full pt-4 sm:py-4 justify-between items-center border-t border-gray-200">
             <div className="text-md text-primary font-semibold truncate">
               {course.price.toLocaleString()} تومان
             </div>
