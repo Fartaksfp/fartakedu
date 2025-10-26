@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from "react";
-import "../../styles/themeToggle.css";
+import "./themeToggle.css";
 import useTheme from "@/stores/useTheme";
 
 function Themetoggle() {

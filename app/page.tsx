@@ -1,7 +1,8 @@
-import Benefits from "@/components/home/benefits/Benefits";
-import LastCta from "@/components/home/cta/LastCta";
-import FeaturedCourses from "@/components/home/featuredCourses/FeaturedCourses";
-import Hero from "@/components/home/hero/Hero";
+
+import Benefits from "@/features/home/components/benefits/Benefits";
+import LastCta from "@/features/home/components/cta/LastCta";
+import FeaturedCourses from "@/features/home/components/featuredCourses/FeaturedCourses";
+import Hero from "@/features/home/components/hero/Hero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
