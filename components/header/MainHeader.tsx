@@ -3,6 +3,7 @@ import Logo from "../shared/Logo";
 import { Button } from "../ui/button";
 import Navbar from "./Navbar";
 import Themetoggle from "../shared/Themetoggle/Themetoggle";
+import LoginDialog from "./LoginDialog";
 
 function MainHeader() {
   return (
@@ -13,20 +14,13 @@ function MainHeader() {
 
       <div className="flex items-center gap-4">
         <div className="sm:hidden">
-        <Themetoggle />
+          <Themetoggle />
         </div>
         <Navbar />
       </div>
 
       <div className="sm:flex flex-row-reverse items-center gap-3 md:gap-5 pl-4 md:pl-20 hidden">
-        <Button
-          variant={"outline"}
-          className="flex flex-row-reverse items-center gap-1 text-sm md:text-base"
-        >
-          <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
-          <User className="w-4 h-4 md:w-5 md:h-5" />
-          <span>ورود | ثبت نام</span>
-        </Button>
+        <LoginDialog />
         <Themetoggle />
       </div>
     </header>

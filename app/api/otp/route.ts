@@ -20,12 +20,12 @@ export async function POST(req: Request) {
         body: JSON.stringify({ to: phone_e164 }),
       }
     );
-
+    
     const result = await melipayamakRes.json();
 
-    if (!melipayamakRes.ok || result.status) {
+    if (!melipayamakRes.ok) {
       return NextResponse.json(
-        { error: result.status || "Provider Error!" },
+        { error: "Provider Error!" },
         { status: 500 }
       );
     }
@@ -36,12 +36,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Provider Error" }, { status: 500 });
     }
 
-    const expires_at = new Date(Date.now() + 5 * 60 * 1000).toISOString();
+    const expires_in = "2 minutes";
 
-    const { data, error } = await supabase.rpc("create_otp", {
+    const { error } = await supabase.rpc("create_otp", {
       phone_e164,
       otp_code,
-      expires_in: expires_at,
+      expires_in: expires_in,
     });
 
     if (error) {
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ data });
+    return NextResponse.json({ success: 'true' });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Server Error:", error);
