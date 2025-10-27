@@ -57,9 +57,6 @@ function LoginDialog() {
         body: JSON.stringify({ phone_e164: phone }),
       });
 
-      console.log(result);
-      
-
       const data = await result.json();
 
       if (!result.ok) {
