@@ -8,43 +8,98 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { ChevronLeft, User } from "lucide-react";
-import { Input } from "../ui/input";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { signIn } from "next-auth/react";
-import { Spinner } from "../ui/spinner";
+import { useRouter } from "next/navigation";
+import { PhoneInput } from "../auth/PhoneInput";
+import { OtpInput } from "../auth/OtpInput";
 
 function LoginDialog() {
   const [phone, setPhone] = useState<string>("");
-  const [otp, setotp] = useState("");
-  const [step, setstep] = useState(1);
-  const [loading, setloading] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, "");
+  const handlePhoneChange = (value: string) => {
+    setError(null);
     setPhone(value);
   };
 
-  const sendOtp = async (phone: string) => {
-    setloading(true);
-    const result = await fetch("http://localhost:3000/api/otp/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone_e164: phone }),
-    });
+  const validatePhone = (phone: string): boolean => {
+    if (!phone) {
+      setError("لطفا شماره موبایل را وارد کنید");
+      return false;
+    }
+    if (phone.length !== 11) {
+      setError("شماره موبایل باید ۱۱ رقم باشد");
+      return false;
+    }
+    if (!phone.startsWith("09")) {
+      setError("شماره موبایل باید با ۰۹ شروع شود");
+      return false;
+    }
+    return true;
+  };
 
-    const data = await result.json();
-    console.log(data);
+  const handleSendOtp = async (phone: string) => {
+    if (!validatePhone(phone)) return;
 
-    if (data.success) {
-      setloading(false);
-      setstep(2);
+    try {
+      setLoading(true);
+      setError(null);
+
+      const result = await fetch("/api/otp/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone_e164: phone }),
+      });
+
+      const data = await result.json();
+
+      if (!result.ok) {
+        throw new Error(data.message || "خطا در ارسال کد تایید");
+      }
+
+      if (data.success) {
+        setStep(2);
+      } else {
+        throw new Error(data.message || "خطا در ارسال کد تایید");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "خطا در ارسال کد تایید");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const result = await signIn("credentials", {
+        phone,
+        otp,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        throw new Error("کد وارد شده صحیح نمی‌باشد");
+      }
+
+      setIsOpen(false);
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "خطا در تایید کد");
+      setLoading(false);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           variant={"outline"}
@@ -61,47 +116,22 @@ function LoginDialog() {
             ورود یا ثبت نام با شماره موبایل
           </DialogTitle>
         </DialogHeader>
-        {step === 1 && (
-          <div className="flex flex-col gap-5 justify-center items-center">
-            <Input
-              value={phone}
-              onChange={handlePhoneChange}
-              placeholder="09123456789"
-              type="tel"
-              className="text-center !text-2xl h-15 w-60 mx-auto"
-              maxLength={11}
-            />
-            <Button className="w-60" onClick={() => sendOtp(phone)}>
-              {loading ? <Spinner /> : "ارسال کد"}
-            </Button>
-          </div>
-        )}{" "}
-        {step === 2 && (
-          <div className="flex flex-col gap-5 justify-center items-center">
-            <InputOTP
-              maxLength={6}
-              onChange={(value: string) => setotp(value)}
-              value={otp}
-              pattern={REGEXP_ONLY_DIGITS}
-            >
-              <InputOTPGroup>
-                <InputOTPSlot index={5} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={0} />
-              </InputOTPGroup>
-            </InputOTP>
-            <Button
-              className="w-60"
-              onClick={() => {
-                signIn("credentials", { phone, otp });
-              }}
-            >
-              {loading ? <Spinner /> : "تایید"}
-            </Button>
-          </div>
+        {step === 1 ? (
+          <PhoneInput
+            phone={phone}
+            onPhoneChange={handlePhoneChange}
+            onSubmit={handleSendOtp}
+            error={error}
+            loading={loading}
+          />
+        ) : (
+          <OtpInput
+            otp={otp}
+            onOtpChange={setOtp}
+            onSubmit={handleVerifyOtp}
+            error={error}
+            loading={loading}
+          />
         )}
       </DialogContent>
     </Dialog>

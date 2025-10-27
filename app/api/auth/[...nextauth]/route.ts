@@ -2,24 +2,25 @@ import supabase from "@/lib/supabaseClient";
 import NextAuth, { User, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
+import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
-      phone: string;
+      phone?: string;
     };
   }
   interface User {
     id: string;
-    phone: string;
+    phone?: string;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
     userId: string;
-    phone: string;
+    phone?: string;
   }
 }
 
@@ -29,36 +30,42 @@ const handler = NextAuth({
       name: "OTP",
       credentials: {
         phone: { label: "Phone", type: "text" },
-        code: { label: "OTP", type: "text" },
+        otp: { label: "OTP", type: "text" },
       },
       async authorize(
-        credentials: Record<"phone" | "code", string> | undefined
+        credentials: Record<"phone" | "otp", string> | undefined
       ) {
-        if (!credentials?.phone || !credentials?.code) {
+        if (!credentials?.phone || !credentials?.otp) {
           return null;
         }
 
-        const { phone, code } = credentials;
+        const { phone, otp } = credentials;
 
         const { data, error } = await supabase.rpc("validate_otp", {
-          phone: phone,
-          code: code,
+          p_phone: phone,
+          p_otp: otp,
         });
-
-        console.log(code);
 
         if (error || !data) {
           console.error("OTP validation failed:", error);
           return null;
         }
 
+        const userData = data[0];
+
         return {
-          id: data.user_id,
-          phone: data.phone,
+          id: userData.user_id,
+          phone: userData.phone,
         };
       },
     }),
   ],
+
+  adapter: SupabaseAdapter({
+    url: process.env.SUPABASE_PROJECT_URL!,
+    secret: process.env.SUPABASE_ROLE_KEY!,
+  }),
+
   session: {
     strategy: "jwt" as const,
   },
@@ -80,4 +87,4 @@ const handler = NextAuth({
   },
 });
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };
