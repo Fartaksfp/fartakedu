@@ -1,14 +1,6 @@
-import type { Metadata } from "next";
 import "./globals.css";
-import MainHeader from "@/components/header/MainHeader";
 import { ThemeProvider } from "next-themes";
-import Footer from "@/components/footer/Footer";
 import AuthProviders from "@/providers/AuthProviders";
-
-export const metadata: Metadata = {
-  title: "پنل آموزشی فرتاک سنجش فناوری پیشرو",
-  description: "پنل آموزشی مخصوص دانشجویان کارکاه های فرتاک سنجش فناوری پیشرو",
-};
 
 export default function RootLayout({
   children,
@@ -20,9 +12,7 @@ export default function RootLayout({
       <body>
         <AuthProviders>
           <ThemeProvider attribute={"class"} defaultTheme="light">
-            <MainHeader />
             {children}
-            <Footer />
           </ThemeProvider>
         </AuthProviders>
       </body>

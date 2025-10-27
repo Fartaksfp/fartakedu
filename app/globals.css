@@ -144,22 +144,22 @@
 
 @font-face {
   font-family: 'Noora';
-  src: url('../assets/fonts/Noora-FD-Regular.woff2') format('woff2');
+  src: url('/fonts/Noora-FD-Regular.woff2') format('woff2');
   font-weight: 400;
 }
 @font-face {
   font-family: 'Noora';
-  src: url('../assets/fonts/Noora-FD-Light.woff2') format('woff2');
+  src: url('/fonts/Noora-FD-Light.woff2') format('woff2');
   font-weight: 300;
 }
 @font-face {
   font-family: 'Noora';
-  src: url('../assets/fonts/Noora-FD-Bold.woff2') format('woff2');
+  src: url('/fonts/Noora-FD-Bold.woff2') format('woff2');
   font-weight: 500;
 }
 @font-face {
   font-family: 'Noora';
-  src: url('../assets/fonts/Noora-FD-ExtraBold.woff2') format('woff2');
+  src: url('/fonts/Noora-FD-ExtraBold.woff2') format('woff2');
   font-weight: 600;
 }
 
