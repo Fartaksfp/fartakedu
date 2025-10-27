@@ -11,8 +11,6 @@ import {
   Pencil,
   Phone,
   Menu,
-  ChevronLeft,
-  User,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -26,6 +24,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import NavItem from "./NavItem";
+import LoginButtonRender from "./LoginButtonRender";
 
 const navbarItems = [
   { name: "صفحه اصلی", href: "/", icon: "house" },
@@ -82,14 +81,7 @@ function Navbar() {
                 );
               })}
             </div>
-            <Button
-              variant={"outline"}
-              className="flex flex-row-reverse mx-10 items-center gap-1 text-sm md:text-base"
-            >
-              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
-              <User className="w-4 h-4 md:w-5 md:h-5" />
-              <span>ورود | ثبت نام</span>
-            </Button>
+            <LoginButtonRender />
           </SheetContent>
         </Sheet>
       </div>

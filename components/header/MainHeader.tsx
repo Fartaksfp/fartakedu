@@ -1,9 +1,7 @@
-import { ChevronLeft, User } from "lucide-react";
 import Logo from "../shared/Logo";
-import { Button } from "../ui/button";
 import Navbar from "./Navbar";
 import Themetoggle from "../shared/Themetoggle/Themetoggle";
-import LoginDialog from "./LoginDialog";
+import LoginButtonRender from "./LoginButtonRender";
 
 function MainHeader() {
   return (
@@ -20,7 +18,7 @@ function MainHeader() {
       </div>
 
       <div className="sm:flex flex-row-reverse items-center gap-3 md:gap-5 pl-4 md:pl-20 hidden">
-        <LoginDialog />
+        <LoginButtonRender />
         <Themetoggle />
       </div>
     </header>

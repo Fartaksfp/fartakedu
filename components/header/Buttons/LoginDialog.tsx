@@ -5,14 +5,14 @@ import {
   DialogContent,
   DialogHeader,
   DialogTrigger,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
+} from "../../ui/dialog";
+import { Button } from "../../ui/button";
 import { ChevronLeft, User } from "lucide-react";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { PhoneInput } from "../auth/PhoneInput";
-import { OtpInput } from "../auth/OtpInput";
+import { PhoneInput } from "../../auth/PhoneInput";
+import { OtpInput } from "../../auth/OtpInput";
 
 function LoginDialog() {
   const [phone, setPhone] = useState<string>("");
@@ -56,6 +56,9 @@ function LoginDialog() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone_e164: phone }),
       });
+
+      console.log(result);
+      
 
       const data = await result.json();
 

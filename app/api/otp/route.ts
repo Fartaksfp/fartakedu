@@ -23,6 +23,9 @@ export async function POST(req: Request) {
     
     const result = await melipayamakRes.json();
 
+    console.log(result);
+    
+
     if (!melipayamakRes.ok) {
       return NextResponse.json(
         { error: "Provider Error!" },
