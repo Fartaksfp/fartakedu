@@ -1,4 +1,5 @@
 import DashbardHeader from "@/features/dashboard/header/DashbardHeader";
+import DashboardSidebar from "@/features/dashboard/sidebar/DashboardSidebar";
 
 export default function RootLayout({
   children,
@@ -8,10 +9,8 @@ export default function RootLayout({
   return (
     <>
       <DashbardHeader />
-      <div className="w-[1200px] pt-5 pb-10 mx-auto">
-
-      {children}
-      </div>
+      <DashboardSidebar />
+      <div className="px-10 pb-10 mx-auto pt-22 mr-52">{children}</div>
     </>
   );
 }

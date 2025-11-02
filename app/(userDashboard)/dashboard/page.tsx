@@ -72,13 +72,13 @@ const latestNews = [
 function page() {
   return (
     <div className='flex flex-col gap-8'>
-      <div className='grid grid-cols-4 gap-5'>
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
         {statsInfo.map((stats,index) => <StatsItem key={index} title={stats.title} number={stats.number} icon={stats.icon} /> )}
       </div>
 
       <div>
         <h2 className="text-2xl font-bold mb-4">دوره‌های در حال یادگیری</h2>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {inProgressCourses.map((course, index) => (
             <DashboardCourseCard
               key={index}
@@ -93,7 +93,7 @@ function page() {
 
       <div>
         <h2 className="text-2xl font-bold mb-4">آخرین اخبار و اطلاعیه‌ها</h2>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {latestNews.map((news, index) => (
             <NewsCard
               key={index}
