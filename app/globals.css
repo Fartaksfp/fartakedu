@@ -146,26 +146,30 @@
   font-family: 'Noora';
   src: url('/fonts/Noora-FD-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Noora';
   src: url('/fonts/Noora-FD-Light.woff2') format('woff2');
   font-weight: 300;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Noora';
   src: url('/fonts/Noora-FD-Bold.woff2') format('woff2');
   font-weight: 500;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Noora';
   src: url('/fonts/Noora-FD-ExtraBold.woff2') format('woff2');
   font-weight: 600;
+  font-display: swap;
 }
 
 body{
   direction: rtl;
-  font-family: 'Noora';
+  font-family: 'Noora', sans-serif;
 }
 
 body,h1,h2,h3,h4,h5,h6,div,input{
