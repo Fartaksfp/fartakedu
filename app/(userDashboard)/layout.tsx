@@ -10,7 +10,7 @@ export default function RootLayout({
     <>
       <DashbardHeader />
       <DashboardSidebar />
-      <div className="px-10 pb-10 mx-auto pt-22 mr-52">{children}</div>
+      <div className="px-10 pb-10 mx-auto pt-22 md:mr-52">{children}</div>
     </>
   );
 }
