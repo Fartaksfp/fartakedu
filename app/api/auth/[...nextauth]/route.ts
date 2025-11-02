@@ -21,6 +21,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     userId: string;
     phone?: string;
+    exp: number
   }
 }
 
@@ -71,9 +72,11 @@ const handler = NextAuth({
   },
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: User | undefined }) {
+      const now = Math.floor(Date.now() / 1000);
       if (user) {
         token.userId = user.id;
         token.phone = user.phone;
+        token.exp = now + 7 * 60 * 60 * 24;
       }
       return token;
     },
@@ -82,6 +85,7 @@ const handler = NextAuth({
         id: token.userId,
         phone: token.phone,
       };
+      session.expires = new Date(token.exp * 1000).toISOString();
       return session;
     },
   },
