@@ -13,16 +13,16 @@ const linkCategories = [
   {
     title: "پشتیبانی",
     links: [
-      { name: "سوالات متداول", href: "/faq" },
-      { name: "پشتیبانی", href: "/support" },
+      { name: "سوالات متداول", href: "/#" },
+      { name: "پشتیبانی", href: "/#" },
       { name: "تماس با ما", href: "/contact" },
     ],
   },
   {
     title: "قوانین و سیاست‌ها",
     links: [
-      { name: "سیاست حفظ حریم خصوصی", href: "/privacy" },
-      { name: "شرایط و قوانین", href: "/terms" },
+      { name: "سیاست حفظ حریم خصوصی", href: "/#" },
+      { name: "شرایط و قوانین", href: "/#" },
     ],
   },
 ];
