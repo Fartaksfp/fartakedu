@@ -9,12 +9,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Themetoggle from "@/components/shared/Themetoggle/Themetoggle";
+import TodayDate from "@/components/shared/TodayDate";
 
 function DashbardHeader() {
   return (
     <header className="border-b bg-white dark:bg-slate-950 fixed z-50 w-full">
       <div className="flex px-10 mx-auto h-16 justify-between items-center ">
         <div className="flex items-center">سلام خوش آمدید👋</div>
+        <div>
+          <TodayDate/>
+        </div>
 
         <div className="flex items-center space-x-4">
           <Themetoggle />

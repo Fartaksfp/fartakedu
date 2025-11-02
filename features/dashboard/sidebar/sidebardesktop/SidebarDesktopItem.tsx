@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, LayoutGrid, LifeBuoy, Newspaper } from "lucide-react";
+import { BookOpen, DoorOpen, LayoutGrid, LifeBuoy, Newspaper } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-type iconKey = "layout-grid" | "book-open" | "newspaper" | "life-buoy";
+type iconKey = "layout-grid" | "book-open" | "newspaper" | "life-buoy" | "door-open";
 
 type ItemType = {
   name: string;
@@ -16,6 +16,7 @@ const iconsMap = {
   "book-open": BookOpen,
   newspaper: Newspaper,
   "life-buoy": LifeBuoy,
+  "door-open": DoorOpen,
 };
 
 function SidebarDesktopItem({ item }: { item: ItemType }) {

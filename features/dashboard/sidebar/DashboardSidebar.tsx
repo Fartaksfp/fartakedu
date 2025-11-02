@@ -6,6 +6,7 @@ const navbarItems = [
   { name: "دوره های من", href: "/dashboard/my-courses", icon: "book-open" },
   { name: "گواهینامه ها", href: "/dashboard/certificates", icon: "newspaper" },
   { name: "پشتیبانی", href: "/dashboard/support", icon: "life-buoy" },
+  { name: "بازگشت به سایت", href: "/", icon: "door-open" },
 ] as const;
 
 function DashboardSidebar() {
