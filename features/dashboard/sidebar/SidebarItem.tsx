@@ -19,7 +19,7 @@ const iconsMap = {
   "door-open": DoorOpen,
 };
 
-function SidebarDesktopItem({ item }: { item: ItemType }) {
+function SidebarItem({ item }: { item: ItemType }) {
   const IconComponent = iconsMap[item.icon];
   return (
     <Link href={item.href}>
@@ -31,4 +31,4 @@ function SidebarDesktopItem({ item }: { item: ItemType }) {
   );
 }
 
-export default SidebarDesktopItem;
+export default SidebarItem;
