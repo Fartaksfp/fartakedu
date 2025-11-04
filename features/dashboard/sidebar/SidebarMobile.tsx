@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -35,7 +36,9 @@ function SidebarMobile() {
             <div className="flex flex-col px-5">
               <div className="flex flex-col gap-2">
                 {navbarItems.map((Item, index) => (
-                  <SidebarItem item={Item} key={index} />
+                  <SheetClose asChild key={index}>
+                    <SidebarItem item={Item} />
+                  </SheetClose>
                 ))}
               </div>
             </div>

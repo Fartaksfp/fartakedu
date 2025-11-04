@@ -3,6 +3,7 @@ type CourseType = {
   description: string;
   duration: number;
   students: number;
+  href:string;
   price: number;
   image: string;
 };
