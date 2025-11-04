@@ -30,6 +30,7 @@ function HeroImage() {
           src={src}
           alt={`Hero Slide ${index + 1}`}
           fill
+          priority
           className={`object-cover transition-opacity duration-1000 ${
             index === imageIndex ? "opacity-100" : "opacity-0"
           }`}
