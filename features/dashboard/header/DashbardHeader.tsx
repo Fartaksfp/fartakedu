@@ -30,29 +30,9 @@ function DashbardHeader() {
             <Bell className="h-5 w-5" />
             <span className="absolute top-0 right-0 h-2 w-2 bg-red-600 rounded-full" />
           </Button>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Profile</SheetTitle>
-              </SheetHeader>
-              <div className="py-4">
-                <div className="flex flex-col space-y-4">
-                  <div className="flex flex-col space-y-1">
-                    <span className="text-sm font-medium">John Doe</span>
-                    <span className="text-sm text-muted-foreground">
-                      john.doe@example.com
-                    </span>
-                  </div>
-                  <Button variant="outline">Sign out</Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <Button variant="ghost" size="icon">
+            <User className="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </header>
