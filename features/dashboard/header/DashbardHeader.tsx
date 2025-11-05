@@ -1,16 +1,11 @@
 import React from "react";
-import { Bell, Menu, User } from "lucide-react";
+import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+
 import Themetoggle from "@/components/shared/Themetoggle/Themetoggle";
 import TodayDate from "@/components/shared/TodayDate";
 import SidebarMobile from "../sidebar/SidebarMobile";
+import Logo from "@/components/shared/Logo";
 
 function DashbardHeader() {
   return (
@@ -21,7 +16,7 @@ function DashbardHeader() {
         </div>
         <div className="items-center ">سلام خوش آمدید👋</div>
         <div>
-          <TodayDate />
+          <Logo width="140px" />
         </div>
 
         <div className=" items-center space-x-4 hidden md:flex">
@@ -29,9 +24,6 @@ function DashbardHeader() {
           <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-5 w-5" />
             <span className="absolute top-0 right-0 h-2 w-2 bg-red-600 rounded-full" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <User className="h-5 w-5" />
           </Button>
         </div>
       </div>

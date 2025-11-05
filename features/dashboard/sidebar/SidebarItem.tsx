@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, DoorOpen, LayoutGrid, LifeBuoy, Newspaper } from "lucide-react";
+import { BookOpen, DoorOpen, LayoutGrid, Newspaper, User } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-type iconKey = "layout-grid" | "book-open" | "newspaper" | "life-buoy" | "door-open";
+type iconKey = "layout-grid" | "book-open" | "newspaper" | "user" | "door-open";
 
 type ItemType = {
   name: string;
@@ -15,7 +15,7 @@ const iconsMap = {
   "layout-grid": LayoutGrid,
   "book-open": BookOpen,
   newspaper: Newspaper,
-  "life-buoy": LifeBuoy,
+  "user": User,
   "door-open": DoorOpen,
 };
 
