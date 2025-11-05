@@ -15,6 +15,7 @@ import {
   InferOutput,
 } from "valibot";
 import { Button } from "@/components/ui/button";
+import { useAddUser } from "@/lib/query/userMutations";
 
 function UserForm() {
   const { data: session } = useSession();
@@ -46,24 +47,25 @@ function UserForm() {
     resolver: valibotResolver(userInfoSchema),
   });
 
-  const onSubmit = async (values: UserInfoForm) => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/user-info", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...values,
-          user_id: session?.user?.id,
-        }),
-      });
-      const data = await res.json();
-      console.log("✅ ذخیره شد:", data);
-    } catch (err) {
-      console.error("❌ خطا:", err);
-    } finally {
-      setLoading(false);
-    }
+  const { mutate: addUser } = useAddUser();
+
+  const onSubmit = (values: UserInfoForm) => {
+    setLoading(true)
+    addUser(
+      {
+        ...values,
+        user_id: session!.user.id,
+        phone: session!.user.phone,
+      },
+      {
+        onSuccess: () => {
+          setLoading(false)
+        },
+        onError: (err) => {
+          console.error("❌ خطا:", err.message);
+        },
+      }
+    );
   };
 
   return (
@@ -108,11 +110,9 @@ function UserForm() {
       </div>
       <div>
         <label>شماره تلفن</label>
-        <Input
-          value={session?.user?.phone ?? ""}
-          disabled
-          className="mt-2 border-2 border-gray-500"
-        />
+        <p
+          className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500"
+        >{session?.user?.phone}</p>
       </div>
       <div>
         <label>نام شرکت</label>
