@@ -1,4 +1,6 @@
-export async function POST(request: Request) {
+import { NextRequest, NextResponse } from "next/server";
+
+export async function POST(request: NextRequest) {
 
     const body = await request.json()
 
@@ -16,6 +18,11 @@ export async function POST(request: Request) {
     })
 
     const data = await res.json()
-    console.log(data);
+
+    if (data.token) {
+        return NextResponse.redirect(new URL(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`))
+    } else {
+        return NextResponse.json({ data },{status: 500})
+    }
      
 }

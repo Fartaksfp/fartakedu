@@ -1,28 +1,30 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import React from 'react'
+"use client";
+import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
 
-function page() {
+function Page() {
 
-    const getPaymentToken = () => {
-        const res = fetch('/api/payment',{
-            method:'POST',
-            body: JSON.stringify({
-                "amount": 15000,
-                "phoneNumber":"09226839455" 
-            })
+  const [data, setdata] = useState("")
 
-        })
+  const getPaymentToken = async () => {
+    const res = await fetch("/api/payment", {
+      method: "POST",
+      body: JSON.stringify({
+        amount: 15000,
+        phoneNumber: "09226839455",
+      }),
+    });
 
-    }
+    const jsondata = await res.json()
+    setdata(JSON.stringify(jsondata))
+  };
 
   return (
-    <div className='py-30'>
-      <Button onClick={getPaymentToken}>
-        Go To Payment
-      </Button>
+    <div className="py-30">
+      <Button onClick={getPaymentToken}>Go To Payment</Button>
+      <p>{data}</p>
     </div>
-  )
+  );
 }
 
-export default page
+export default Page;
