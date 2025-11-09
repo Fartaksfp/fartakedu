@@ -19,6 +19,8 @@ export async function POST(request: NextRequest) {
 
     const data = await res.json()
 
+    console.log(data);
+
     if (data.token) {
         return NextResponse.redirect(new URL(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`))
     } else {
