@@ -18,10 +18,18 @@ function Page() {
     const jsondata = await res.json()
     setdata(JSON.stringify(jsondata))
   };
+  
+  const checkip = async () => {
+    const res = await fetch("/api/ipchecker")
+
+    const jsondata = await res.json()
+    setdata(JSON.stringify(jsondata))
+  };
 
   return (
     <div className="py-30">
       <Button onClick={getPaymentToken}>Go To Payment</Button>
+      <Button onClick={checkip}>Go To Payment</Button>
       <p>{data}</p>
     </div>
   );
