@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { redirect } from "next/navigation";
 import React, { useState } from "react";
 
 function Page() {
@@ -20,7 +19,7 @@ function Page() {
     setdata(JSON.stringify(jsondata))
     console.log(jsondata);
     
-    redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${jsondata.data.token}`)
+    // redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${jsondata.data.token}`)
   };
   
   const checkip = async () => {
