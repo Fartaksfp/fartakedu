@@ -18,7 +18,9 @@ function Page() {
 
     const jsondata = await res.json()
     setdata(JSON.stringify(jsondata))
-    redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${jsondata.token}`)
+    console.log(jsondata);
+    
+    redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${jsondata[0].token}`)
   };
   
   const checkip = async () => {
