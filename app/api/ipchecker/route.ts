@@ -8,7 +8,7 @@ export async function GET() {
 
     console.log(data);
 
-    if (data.token) {
+    if (data) {
         return NextResponse.json({ data },{status: 200})
     } else {
         return NextResponse.json({ data },{status: 500})

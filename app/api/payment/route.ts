@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             "action": "token",
-            "TerminalId": process.env.SEP_TERMINAL_ID ,
+            "TerminalId": process.env.SEP_TERMINAL_ID,
             "Amount": body.amount,
             "ResNum": "1qaz@WSX",
             "RedirectUrl": "https://academy.fartaksfp.com/receipt",
@@ -22,9 +22,9 @@ export async function POST(request: NextRequest) {
     console.log(data);
 
     if (data.token) {
-        return NextResponse.redirect(new URL(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`))
+        return NextResponse.redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`)
     } else {
-        return NextResponse.json({ data },{status: 500})
+        return NextResponse.json({ data }, { status: 500 })
     }
-     
+
 }
