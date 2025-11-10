@@ -23,9 +23,9 @@ export async function POST(request: NextRequest) {
 
     if (data.token) {
 
-        // return NextResponse.json({data})
+        return NextResponse.json({data})
 
-        return NextResponse.redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`)
+        // return NextResponse.redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`)
     } else {
         return NextResponse.json({ data }, { status: 500 })
     }
