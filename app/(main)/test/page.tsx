@@ -18,7 +18,7 @@ function Page() {
     const jsondata = await res.json()
     setdata(JSON.stringify(jsondata))
     console.log(jsondata);
-    
+    fetch(`/api/sendtopay?token=${jsondata.data.token}`)
     // redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${jsondata.data.token}`)
   };
   
