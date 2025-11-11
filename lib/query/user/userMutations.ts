@@ -1,15 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-export interface UserInfoPayload {
-  user_id: string;
-  first_name: string;
-  last_name: string;
-  age: number;
-  company_name?: string;
-  courses_count?: number;
-  certificates_count?: number;
-  phone?: string;
-}
+import { UserInfoPayload } from "@/types/userInfo";
 
 export function useAddUser() {
   const queryClient = useQueryClient();

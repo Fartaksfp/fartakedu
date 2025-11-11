@@ -4,6 +4,7 @@ import getCourses from "@/hooks/courses/getCourses";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { courseType } from "@/features/courses/types/course";
 
 function FeaturedCourses() {
 
@@ -18,7 +19,7 @@ function FeaturedCourses() {
         </p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
-        {courses.map((course, index) => (
+        {courses.map((course: courseType, index) => (
           <CourseCard key={index} course={course} />
         ))}
       </div>

@@ -16,7 +16,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
             <div className="relative h-full w-full overflow-hidden rounded-lg">
               <Image 
                 src={course.image} 
-                alt={course.name + " تصویر"} 
+                alt={course.title + " تصویر"} 
                 fill
                 className="object-cover"
                 priority
@@ -26,7 +26,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
 
           <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-4">{course.name}</h1>
+              <h1 className="text-3xl font-bold mb-4">{course.title}</h1>
               <p className="text-muted-foreground leading-relaxed">{course.description}</p>
             </div>
 

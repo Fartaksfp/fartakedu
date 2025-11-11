@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import UserForm from "@/features/dashboard/profile/UserForm";
 import SkeletonForm from "@/features/dashboard/profile/SkeletonForm";
-import { useUser } from "@/lib/query/useUser";
+import { useUser } from "@/lib/query/user/useUser";
 import UserInfo from "@/features/dashboard/profile/UserInfo";
 import { useEffect } from "react";
 

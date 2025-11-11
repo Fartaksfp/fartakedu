@@ -15,7 +15,7 @@ import {
   InferOutput,
 } from "valibot";
 import { Button } from "@/components/ui/button";
-import { useAddUser } from "@/lib/query/userMutations";
+import { useAddUser } from "@/lib/query/user/userMutations";
 
 function UserForm() {
   const { data: session } = useSession();

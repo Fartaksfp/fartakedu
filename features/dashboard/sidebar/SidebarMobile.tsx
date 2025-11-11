@@ -15,7 +15,7 @@ const navbarItems = [
   { name: "داشبورد", href: "/dashboard", icon: "layout-grid" },
   { name: "دوره های من", href: "/dashboard/my-courses", icon: "book-open" },
   { name: "گواهینامه ها", href: "/dashboard/certificates", icon: "newspaper" },
-  { name: "پشتیبانی", href: "/dashboard/support", icon: "life-buoy" },
+  { name: "پروفایل", href: "/dashboard/support", icon: "user" },
   { name: "بازگشت به سایت", href: "/", icon: "door-open" },
 ] as const;
 
