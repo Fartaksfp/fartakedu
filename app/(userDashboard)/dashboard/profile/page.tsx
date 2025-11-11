@@ -1,6 +1,5 @@
 "use client";
 import { useSession } from "next-auth/react";
-import UserForm from "@/features/dashboard/profile/UserForm";
 import SkeletonForm from "@/features/dashboard/profile/SkeletonForm";
 import { useUser } from "@/lib/query/user/useUser";
 import UserInfo from "@/features/dashboard/profile/UserInfo";
@@ -11,7 +10,7 @@ function Page() {
     document.title = "پروفایل کاربر";
   }, []);
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const userId = session?.user?.id;
 
@@ -22,12 +21,6 @@ function Page() {
   if (data?.success === true && data.res) {
     return <UserInfo data={data.res} />;
   }
-
-  return (
-    <>
-      <div>{status === "loading" ? <SkeletonForm /> : <UserForm />}</div>
-    </>
-  );
 }
 
 export default Page;

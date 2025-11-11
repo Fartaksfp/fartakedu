@@ -10,14 +10,7 @@ import {
 import { Menu } from "lucide-react";
 import React from "react";
 import SidebarItem from "./SidebarItem";
-
-const navbarItems = [
-  { name: "داشبورد", href: "/dashboard", icon: "layout-grid" },
-  { name: "دوره های من", href: "/dashboard/my-courses", icon: "book-open" },
-  { name: "گواهینامه ها", href: "/dashboard/certificates", icon: "newspaper" },
-  { name: "پروفایل", href: "/dashboard/support", icon: "user" },
-  { name: "بازگشت به سایت", href: "/", icon: "door-open" },
-] as const;
+import { navbarItems } from "@/static/dashboardNavbarItems";
 
 function SidebarMobile() {
   return (
