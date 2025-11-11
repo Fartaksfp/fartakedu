@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Loading() {
+function loading() {
   return (
-    <div className='h-dvh justify-center items-center'>
-      <p>در حال بارگزاری...</p>
+    <div className='h-dvh flex justify-center items-center'>
+      <p className='text-black'>در حال بارگزاری...</p>
     </div>
   )
 }
 
-export default Loading
+export default loading
