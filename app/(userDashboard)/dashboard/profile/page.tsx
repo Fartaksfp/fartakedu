@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import SkeletonForm from "@/features/dashboard/profile/SkeletonForm";
-import { useUser } from "@/lib/query/user/useUser";
+import { useUser } from "@/hooks/user/useUser";
 import UserInfo from "@/features/dashboard/profile/UserInfo";
 import { useEffect } from "react";
 

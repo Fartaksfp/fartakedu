@@ -1,5 +1,5 @@
 "use client";
-import { useCart } from "@/lib/query/cart/useCart";
+import { useCart } from "@/hooks/cart/useCart";
 import { ShoppingBasket } from "lucide-react";
 import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";

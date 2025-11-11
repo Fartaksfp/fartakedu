@@ -4,7 +4,7 @@ import SearchBar from "@/features/courses/components/SearchBar";
 import Sidebar from "@/features/courses/components/Sidebar";
 import { courseType } from "@/features/courses/types/course";
 import { Metadata } from "next";
-import { getCourses } from "@/lib/query/course/getCourses";
+import { getCourses } from "@/hooks/course/getCourses";
 
 export const dynamic = 'force-dynamic'
 

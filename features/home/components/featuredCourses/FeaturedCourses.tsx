@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import CourseCard from "@/features/courses/components/CourseCard";
-import getCourses from "@/hooks/courses/getCourses";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { courseType } from "@/features/courses/types/course";
+import { getCourses } from "@/hooks/course/getCourses";
 
-function FeaturedCourses() {
-
-  const courses = getCourses()
+async function FeaturedCourses() {
+  const data = await getCourses(4);
+  const courses = await data!.coursesdata;
 
   return (
     <div className="flex flex-col items-center gap-10">
@@ -19,16 +19,16 @@ function FeaturedCourses() {
         </p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
-        {courses.map((course: courseType, index) => (
+        {courses.map((course: courseType, index: number) => (
           <CourseCard key={index} course={course} />
         ))}
       </div>
       <div>
-        <Link href={'/courses'}>
-        <Button variant={"outline"} className="flex items-center gap-2">
-          <span>مشاهده تمام دوره ها</span>
-          <ArrowLeft />
-        </Button>
+        <Link href={"/courses"}>
+          <Button variant={"outline"} className="flex items-center gap-2">
+            <span>مشاهده تمام دوره ها</span>
+            <ArrowLeft />
+          </Button>
         </Link>
       </div>
     </div>
