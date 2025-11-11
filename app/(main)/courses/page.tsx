@@ -6,7 +6,7 @@ import { courseType } from "@/features/courses/types/course";
 import { Metadata } from "next";
 import { getCourses } from "@/lib/query/course/getCourses";
 
-// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'فرتاک - دوره‌های آموزشی برتر',
