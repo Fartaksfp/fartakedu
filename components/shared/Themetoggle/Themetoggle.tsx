@@ -13,7 +13,7 @@ function Themetoggle() {
     if (theme === 'dark'){
       toggleTheme()
     }
-  },[])
+  })
 
   useEffect(()=>{
 

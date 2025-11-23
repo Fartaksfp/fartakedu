@@ -66,7 +66,6 @@ export async function POST(req: Request) {
 
     if (error) {
       if (error.code === '23505') {
-        console.log(error);
         return NextResponse.json({ success: false, message: "کاربر تکراری" },
           { status: 500 })
       }

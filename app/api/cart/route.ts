@@ -18,8 +18,6 @@ export async function GET(req: Request) {
     });
 
     if (error) {
-        console.log(error);
-        
       return NextResponse.json(
         { success: false, message: error.message },
         { status: 500 }

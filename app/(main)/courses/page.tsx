@@ -1,7 +1,5 @@
 import React from "react";
 import CourseCard from "@/features/courses/components/CourseCard";
-import SearchBar from "@/features/courses/components/SearchBar";
-import Sidebar from "@/features/courses/components/Sidebar";
 import { courseType } from "@/features/courses/types/course";
 import { Metadata } from "next";
 import { getCourses } from "@/hooks/course/getCourses";
