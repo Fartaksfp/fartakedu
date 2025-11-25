@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -22,7 +21,9 @@ export async function POST(request: NextRequest) {
     console.log(data);
 
     if (data.token) {
-        redirect(`https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`)
+        return NextResponse.json({
+            redirectUrl: `https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`
+        })
     } else {
         return NextResponse.json({ data }, { status: 500 })
     }
