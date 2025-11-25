@@ -10,10 +10,8 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-        console.log(error);
         return NextResponse.json({ message: 'failed' }, { status: 500 })
     } else {
-        console.log(data);
         return NextResponse.json(data)
     }
 }

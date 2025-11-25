@@ -43,15 +43,13 @@ export default function Page() {
   const handleDeleteCourse = async (courseId: string) => {
     const cartN = cart![0];
     const data = await removeCourseFromCart(cartN.uuid, courseId);
-    console.log(data);
+
     setCart(data);
   };
 
   const handleCheckout = () => {
-    console.log(session?.user.phone);
     
     const payment = SendPayment(cart![0].uuid, session!.user!.phone!, cart![0].total)
-    console.log(payment);
     
   }
 
