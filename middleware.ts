@@ -1,10 +1,12 @@
-import { withAuth } from "next-auth/middleware"
+import { type NextRequest } from "next/server"
+import { updateSession } from "@/utils/supabase/middleware"
 
-export default withAuth({
-  pages: {
-    signIn: "/login",
-    error: "/error",
-  },
-})
+export async function middleware(request: NextRequest) {
+  return await updateSession(request)
+}
 
-export const config = { matcher: ["/dashboard","/dashboard/:path"] }
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+}
