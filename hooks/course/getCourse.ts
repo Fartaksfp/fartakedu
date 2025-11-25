@@ -7,12 +7,10 @@ export async function getCourse(href: string) {
     if (error) {
         return { error: error.message, status: 500 }
     }
-    if (data) {
-        const coursedata = data
-        if (Object.keys(coursedata).length === 0) {
-            return { error: 'course not found', status: 404 }
-        }
-        return { coursesdata: coursedata, status: 200 }
+    const coursedata = data
+    if (Object.keys(coursedata).length === 0) {
+        return { error: 'course not found', status: 404 }
     }
+    return { coursesdata: coursedata, status: 200 }
 
 }

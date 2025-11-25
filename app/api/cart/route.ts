@@ -1,5 +1,5 @@
 import supabase from "@/lib/supabaseClient";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   try {
@@ -38,5 +38,22 @@ export async function GET(req: Request) {
       { success: false, message: error.message || "Internal Server Error" },
       { status: 500 }
     );
+  }
+}
+
+export async function POST(req: NextRequest) {
+  const body = await req.json()
+
+  const { data, error } = await supabase.rpc("add_to_cart", {
+    p_course_id: body.course,
+    p_user_id: body.userId
+  });
+
+  if (error) {
+    console.log(error);
+    return NextResponse.json({ message: 'failed' }, { status: 500 })
+  } else {
+    console.log(data);
+    return NextResponse.json({ message: 'success' }, { status: 200 })
   }
 }
