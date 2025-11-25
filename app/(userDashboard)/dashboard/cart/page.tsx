@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cartType } from "@/features/dashboard/cart/cartType";
 import { removeCourseFromCart } from "@/hooks/cart/removeCourseFromCart";
-import { useRouter } from "next/navigation";
+import { SendPayment } from "@/hooks/payment/SendPayment";
 
 export default function Page() {
   const { data: session } = useSession();
@@ -46,6 +46,14 @@ export default function Page() {
     console.log(data);
     setCart(data);
   };
+
+  const handleCheckout = () => {
+    console.log(session?.user.phone);
+    
+    const payment = SendPayment(cart![0].uuid, session!.user!.phone!, cart![0].total)
+    console.log(payment);
+    
+  }
 
   if (data?.success && cart?.length !== 0) {
     return (
@@ -108,7 +116,7 @@ export default function Page() {
               {cart.status === "pending" && (
                 <Button
                   className="w-full sm:w-50 text-lg sm:text-xl h-12"
-                  // onClick={handleCheckout}
+                  onClick={handleCheckout}
                 >
                   پرداخت
                 </Button>

@@ -12,7 +12,7 @@ export function useUser(user_id: string | undefined) {
             const data = await res.json();
             return data;
         },
-        enabled: !!user_id,
+        enabled: !user_id,
         staleTime: 1000 * 60 * 60,
     });
 }
