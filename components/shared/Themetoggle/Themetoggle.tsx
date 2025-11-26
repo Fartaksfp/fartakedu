@@ -12,8 +12,7 @@ function Themetoggle() {
     if (theme === "dark") {
       toggleTheme();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [toggleTheme]);
 
   useEffect(() => {
     if (darkMode) {
