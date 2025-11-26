@@ -6,13 +6,14 @@ import useTheme from "@/stores/useTheme";
 function Themetoggle() {
   const darkMode = useTheme((state) => state.darkMode);
   const toggleTheme = useTheme((state) => state.toggleTheme);
-
+  console.log(darkMode);
+  
   useEffect(() => {
     const theme = localStorage.getItem("theme");
-    if (theme === "dark") {
+    if (theme === "dark" && !darkMode) {
       toggleTheme();
     }
-  }, [toggleTheme]);
+  }, [darkMode, toggleTheme]);
 
   useEffect(() => {
     if (darkMode) {
