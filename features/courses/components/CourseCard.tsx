@@ -20,9 +20,7 @@ function CourseCard({ course }: { course: courseType }) {
         <div className="p-4 sm:p-6 flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <h3 className="text-lg font-semibold truncate">{course.title}</h3>
-            <p className="text-xs line-clamp-2">
-              {course.description}
-            </p>
+            <p className="text-xs line-clamp-2">{course.description}</p>
           </div>
           <div className="hidden sm:flex flex-col sm:flex-row w-full">
             <div className="flex flex-1 gap-2 items-center">

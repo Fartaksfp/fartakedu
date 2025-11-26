@@ -36,7 +36,7 @@ export default function Page() {
       setCart(data.res);
       setLoading(false);
     };
-    
+
     fetchCart();
   }, [user]);
 
@@ -79,7 +79,10 @@ export default function Page() {
       </h1>
 
       {cart.map((cartItem: cartType) => (
-        <div key={cartItem.uuid} className="border rounded-lg p-4 mb-6 shadow-sm">
+        <div
+          key={cartItem.uuid}
+          className="border rounded-lg p-4 mb-6 shadow-sm"
+        >
           <div className="space-y-4">
             {cartItem.courses?.map((course: courseType) => (
               <div
@@ -123,7 +126,10 @@ export default function Page() {
                   : "text-green-600")
               }
             >
-              وضعیت: {cartItem.status === "pending" ? "در انتظار پرداخت" : "پرداخت شده"}
+              وضعیت:{" "}
+              {cartItem.status === "pending"
+                ? "در انتظار پرداخت"
+                : "پرداخت شده"}
             </p>
           </div>
 

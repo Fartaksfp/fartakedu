@@ -85,7 +85,7 @@ function Login({ setIsOpen }: ModalProps) {
       });
 
       const data = await result.json();
-      
+
       if (data.success === false) {
         throw new Error("کد وارد شده صحیح نمی‌باشد");
       } else {

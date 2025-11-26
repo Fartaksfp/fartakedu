@@ -1,7 +1,7 @@
 import { UserInfoPayload } from "@/types/userInfo";
 import React from "react";
 
-function UserInfo({data} : {data:UserInfoPayload}) {
+function UserInfo({ data }: { data: UserInfoPayload }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div>

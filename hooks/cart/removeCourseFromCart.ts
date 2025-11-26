@@ -1,12 +1,12 @@
 export async function removeCourseFromCart(cartId: string, courseId: string) {
-    const res = fetch('/api/rmcourse', {
-        method: 'POST',
-        headers:{
-            'Content' : 'application/json'
-        },
-        body: JSON.stringify({cartId: cartId, courseId:courseId})
-    })
+  const res = fetch("/api/rmcourse", {
+    method: "POST",
+    headers: {
+      Content: "application/json",
+    },
+    body: JSON.stringify({ cartId: cartId, courseId: courseId }),
+  });
 
-    const data = await (await res).json()
-    return data
+  const data = await (await res).json();
+  return data;
 }

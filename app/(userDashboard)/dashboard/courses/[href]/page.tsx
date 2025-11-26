@@ -9,7 +9,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
 
   const data = await getCourse(href);
   if (data?.status >= 400) {
-    return <div>خطا در دریافت اطلاعات</div>
+    return <div>خطا در دریافت اطلاعات</div>;
   }
   const course = await data?.coursesdata;
 
@@ -94,7 +94,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
               </div>
 
               <div className="pt-6">
-                <AddToCartButton id={course.id}/>
+                <AddToCartButton id={course.id} />
               </div>
             </div>
           </div>

@@ -5,9 +5,9 @@ import React from "react";
 
 async function page() {
   const res = await getCourses();
-  if (res.status >= 400){
-    return <div>خطا در دریافت اطلاعات</div>
-  } 
+  if (res.status >= 400) {
+    return <div>خطا در دریافت اطلاعات</div>;
+  }
   const courses = res.coursesdata;
 
   return (

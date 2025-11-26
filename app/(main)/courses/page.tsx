@@ -4,24 +4,24 @@ import { courseType } from "@/features/courses/types/course";
 import { Metadata } from "next";
 import { getCourses } from "@/data-layer/course/getCourses";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: 'فرتاک - دوره‌های آموزشی برتر',
-  description: 'دوره‌های آنلاین برنامه‌نویسی، طراحی و مهارت‌های فنی با اساتید فرتاک',
+  title: "فرتاک - دوره‌های آموزشی برتر",
+  description:
+    "دوره‌های آنلاین برنامه‌نویسی، طراحی و مهارت‌های فنی با اساتید فرتاک",
   openGraph: {
-    title: 'دوره‌های آموزشی فرتاک',
-    description: 'یادگیری مهارت‌های جدید با بهترین دوره‌های آموزشی',
-    url: 'https://academy.fartaksfp.com/courses',
-    siteName: 'فرتاک',
-    type: 'website',
+    title: "دوره‌های آموزشی فرتاک",
+    description: "یادگیری مهارت‌های جدید با بهترین دوره‌های آموزشی",
+    url: "https://academy.fartaksfp.com/courses",
+    siteName: "فرتاک",
+    type: "website",
   },
-}
+};
 
 async function Page() {
-
-  const data = await getCourses()
-  const courses = await data!.coursesdata
+  const data = await getCourses();
+  const courses = await data!.coursesdata;
 
   return (
     <div className="container mx-auto py-30 px-4">

@@ -15,7 +15,7 @@ const iconsMap = {
   "layout-grid": LayoutGrid,
   "book-open": BookOpen,
   newspaper: Newspaper,
-  "user": User,
+  user: User,
   "door-open": DoorOpen,
 };
 

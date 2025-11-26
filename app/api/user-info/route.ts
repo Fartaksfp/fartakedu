@@ -1,4 +1,3 @@
-
 import { supabase } from "@/utils/supabase/client";
 import { NextResponse } from "next/server";
 
@@ -10,7 +9,7 @@ export async function GET(req: Request) {
     if (!user_id) {
       return NextResponse.json(
         { success: false, message: "user_id is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -21,14 +20,14 @@ export async function GET(req: Request) {
     if (error) {
       return NextResponse.json(
         { success: false, message: error.message },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     if (!data) {
       return NextResponse.json(
         { success: false, message: "User not found" },
-        { status: 200 }
+        { status: 200 },
       );
     }
 
@@ -37,22 +36,15 @@ export async function GET(req: Request) {
   } catch (error: any) {
     return NextResponse.json(
       { success: false, message: error.message || "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function POST(req: Request) {
-
   try {
-    const {
-      user_id,
-      first_name,
-      last_name,
-      age,
-      phone,
-      company_name,
-    } = await req.json()
+    const { user_id, first_name, last_name, age, phone, company_name } =
+      await req.json();
 
     const { data, error } = await supabase.rpc("insert_user_info", {
       p_user_id: user_id,
@@ -66,22 +58,25 @@ export async function POST(req: Request) {
     });
 
     if (error) {
-      console.log(error);
-      if (error.code === '23505') {
-        return NextResponse.json({ success: false, message: "کاربر تکراری" },
-          { status: 500 })
+      if (error.code === "23505") {
+        return NextResponse.json(
+          { success: false, message: "کاربر تکراری" },
+          { status: 500 },
+        );
       }
-      return NextResponse.json({ success: false, message: error },
-        { status: 500 })
+      return NextResponse.json(
+        { success: false, message: error },
+        { status: 500 },
+      );
     }
 
-    const res = data
+    const res = data;
 
-    return NextResponse.json({ res }, { status: 200 })
+    return NextResponse.json({ res }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ success: false, message: error },
-      { status: 500 })
+    return NextResponse.json(
+      { success: false, message: error },
+      { status: 500 },
+    );
   }
-
 }

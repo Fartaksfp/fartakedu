@@ -21,19 +21,26 @@ export async function getUser() {
 
   const userId = data.payload.user_id;
   try {
-    
     const { data: user } = await supabase
       .from("users_info")
       .select("*")
       .eq("user_id", userId)
       .maybeSingle();
-      
+
     if (user) {
       return user;
     } else {
-      return { info: null, phone: data.payload.phone, user_id: data.payload.user_id };
+      return {
+        info: null,
+        phone: data.payload.phone,
+        user_id: data.payload.user_id,
+      };
     }
   } catch {
-    return { info: null, phone: data.payload.phone, user_id: data.payload.user_id };
+    return {
+      info: null,
+      phone: data.payload.phone,
+      user_id: data.payload.user_id,
+    };
   }
 }
