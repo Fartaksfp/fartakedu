@@ -18,15 +18,11 @@ function DashboardCourseCard({
   return (
     <div className="border rounded-lg overflow-hidden">
       <div className="relative h-90">
-        <Image
-          src={thumbnail}
-          alt={title}
-          fill
-          className="object-cover"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/100 to-transparent py-20 px-4">
-        </div>
-          <h3 className="text-white font-semibold absolute bottom-4 right-4">{title}</h3>
+        <Image src={thumbnail} alt={title} fill className="object-cover" />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/100 to-transparent py-20 px-4"></div>
+        <h3 className="text-white font-semibold absolute bottom-4 right-4">
+          {title}
+        </h3>
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between mb-2">

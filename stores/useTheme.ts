@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from "zustand";
 
 interface ThemeState {
   darkMode: boolean;
@@ -7,7 +7,8 @@ interface ThemeState {
 
 const useTheme = create<ThemeState>((set) => ({
   darkMode: false,
-  toggleTheme: () => set((state: { darkMode: boolean }) => ({ darkMode: !state.darkMode })),
-}))
+  toggleTheme: () =>
+    set((state: { darkMode: boolean }) => ({ darkMode: !state.darkMode })),
+}));
 
-export default useTheme
+export default useTheme;

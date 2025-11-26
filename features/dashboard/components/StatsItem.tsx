@@ -24,7 +24,7 @@ function StatsItem({ title, number, icon }: StatsItemProps) {
         <div className="text-4xl">{number}</div>
       </div>
       <div className="bg-primary/10  p-5 rounded-full">
-        {IconComponent  && <IconComponent className="w-6 h-6 text-primary " />}
+        {IconComponent && <IconComponent className="w-6 h-6 text-primary " />}
       </div>
     </div>
   );

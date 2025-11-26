@@ -2,17 +2,16 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, BookOpen, User } from "lucide-react";
-import { getCourse } from "@/hooks/course/getCourse";
+import { getCourse } from "@/data-layer/course/getCourse";
 import { notFound } from "next/navigation";
 
 async function page({ params }: { params: Promise<{ href: string }> }) {
   const { href } = await params;
 
   const data = await getCourse(href);
-  
-  if (data?.status === 404) {
-    notFound()
 
+  if (data?.status === 404) {
+    notFound();
   } else {
     const course = await data?.coursesdata;
     return (
@@ -36,7 +35,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
                 />
               </div>
             </div>
-  
+
             <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
               <div>
                 <h1 className="text-3xl font-bold mb-4">{course.title}</h1>
@@ -46,7 +45,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
                   {course.description}
                 </p>
               </div>
-  
+
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <div className="p-3 rounded-full bg-primary/10">
@@ -67,7 +66,6 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
                   </div>
                 </div>
 
-  
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <div className="p-3 rounded-full bg-primary/10">
                     <Users className="w-5 h-5 text-primary" />
@@ -79,18 +77,20 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
                     <p className="font-medium">{course.students} نفر</p>
                   </div>
                 </div>
-  
+
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <div className="p-3 rounded-full bg-primary/10">
                     <BookOpen className="w-5 h-5 text-primary" />
                   </div>
                   <div className="mr-5">
                     <p className="text-sm text-muted-foreground">قیمت دوره</p>
-                    <p className="font-medium">{course.price.toLocaleString()} تومان</p>
+                    <p className="font-medium">
+                      {course.price.toLocaleString()} تومان
+                    </p>
                   </div>
                 </div>
               </div>
-  
+
               <div className="pt-6">
                 <Button size="lg" className="w-full sm:w-auto">
                   ثبت نام در دوره
@@ -102,7 +102,6 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
       </div>
     );
   }
-
 }
 
 export default page;

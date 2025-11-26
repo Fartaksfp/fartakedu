@@ -1,15 +1,36 @@
 import React, { Suspense } from "react";
 import Image from "next/image";
 import { Clock, Users, BookOpen, User } from "lucide-react";
-import { getCourse } from "@/hooks/course/getCourse";
+import { getCourse } from "@/data-layer/course/getCourse";
 import { notFound } from "next/navigation";
 import AddToCartButton from "@/features/dashboard/profile/AddToCartButton";
+
+export async function generateMetadata({ params }: { params: { href: string } }) {
+  const data = await getCourse(params.href);
+  if (data?.status >= 400) {
+    return {
+      title: "خطا در دریافت اطلاعات | فرتاک",
+    };
+  }
+  const course = await data?.coursesdata;
+
+  if (data?.status === 404) {
+    return {
+      title: "دوره یافت نشد | فرتاک",
+    };
+  } else {
+    return {
+      title: `${course.title} | فرتاک`,
+    };
+  }
+}
+
 async function page({ params }: { params: Promise<{ href: string }> }) {
   const { href } = await params;
 
   const data = await getCourse(href);
   if (data?.status >= 400) {
-    return <div>خطا در دریافت اطلاعات</div>
+    return <div>خطا در دریافت اطلاعات</div>;
   }
   const course = await data?.coursesdata;
 
@@ -94,7 +115,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
               </div>
 
               <div className="pt-6">
-                <AddToCartButton id={course.id}/>
+                <AddToCartButton id={course.id} />
               </div>
             </div>
           </div>

@@ -1,36 +1,38 @@
-"use client"
+"use client";
 import React, { useEffect } from "react";
 import "./themeToggle.css";
 import useTheme from "@/stores/useTheme";
 
 function Themetoggle() {
-
-  const darkMode = useTheme((state) => state.darkMode)
-  const toggleTheme = useTheme((state) => state.toggleTheme)
+  const darkMode = useTheme((state) => state.darkMode);
+  const toggleTheme = useTheme((state) => state.toggleTheme);
 
   useEffect(() => {
-    const theme = localStorage.getItem('theme')
-    if (theme === 'dark'){
-      toggleTheme()
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      toggleTheme();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  useEffect(()=>{
-
-    if (darkMode){
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else{
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-
-  },[darkMode])
+  }, [darkMode]);
 
   return (
     <label className="switch">
-      <input checked={!darkMode} onChange={toggleTheme} id="checkbox" type="checkbox" />
+      <input
+        checked={!darkMode}
+        onChange={toggleTheme}
+        id="checkbox"
+        type="checkbox"
+      />
       <span className="slider">
         <div className="star star_1"></div>
         <div className="star star_2"></div>

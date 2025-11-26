@@ -1,4 +1,4 @@
-import supabase from "@/lib/supabaseClient";
+import { supabase } from "@/utils/supabase/client";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     if (!phone_e164) {
       return NextResponse.json(
         { error: "Phone Number Not Send!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to: phone_e164 }),
-      }
+      },
     );
 
     const result = await melipayamakRes.json();
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     console.error("Server Error:", error);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

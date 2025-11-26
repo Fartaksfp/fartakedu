@@ -20,10 +20,8 @@ function MainHeader() {
       </div>
 
       <div className="sm:flex flex-row-reverse items-center gap-3 md:gap-5 pl-4 md:pl-20 hidden">
-        <Link href={'https://fartaksfp.com'}>
-          <Button>
-            بازگشت به سایت
-          </Button>
+        <Link href={"https://fartaksfp.com"}>
+          <Button>بازگشت به سایت</Button>
         </Link>
         <LoginButtonRender />
         <Themetoggle />

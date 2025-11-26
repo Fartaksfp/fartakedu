@@ -5,13 +5,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 
-import {
-  House,
-  BookOpen,
-  Pencil,
-  Phone,
-  Menu,
-} from "lucide-react";
+import { House, BookOpen, Pencil, Phone, Menu } from "lucide-react";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

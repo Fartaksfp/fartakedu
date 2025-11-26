@@ -1,10 +1,10 @@
 import Login from "@/components/auth/Login";
-import { getServerSession } from "next-auth";
+import { getSession } from "@/data-layer/user/getSession";
 import { redirect } from "next/navigation";
 import React from "react";
 
 async function Page() {
-  const session = await getServerSession();
+  const session = await getSession();
 
   if (session) {
     redirect("/dashboard");

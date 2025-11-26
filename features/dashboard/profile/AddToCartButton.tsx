@@ -1,23 +1,28 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
-import React from "react";
+import { getUser } from "@/data-layer/user/getUser";
+import { UserInfoPayload } from "@/types/userInfo";
+import React, { useEffect, useState } from "react";
 
 function AddToCartButton({ id }: { id: string }) {
-  const { data: session } = useSession();
-  const userId = session?.user.id;
+  const [user, setuser] = useState<UserInfoPayload>();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUser();
+      setuser(user);
+    };
+    fetchUser();
+  }, []);
 
   const addToCart = async (courseId: string) => {
-    const res = await fetch('/api/cart', {
-        method: 'POST',
-        headers: {
-            'Content' : 'application/json'
-        },
-        body: JSON.stringify({userId : userId, course: courseId})
-    })
-
-    const data = await res.json()
-    
+    await fetch("/api/cart", {
+      method: "POST",
+      headers: {
+        Content: "application/json",
+      },
+      body: JSON.stringify({ userId: user?.user_id, course: courseId }),
+    });
   };
 
   return (
