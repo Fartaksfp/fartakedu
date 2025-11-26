@@ -1,12 +1,20 @@
-import { type NextRequest } from "next/server"
-import { updateSession } from "@/utils/supabase/middleware"
+import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "./data-layer/user/getSession";
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+  const session = await getSession();
+
+  if (!session) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  if (session === "valid") {
+    return NextResponse.next();
+  }
+
+  return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
-}
+  matcher: ["/dashboard", "/dashboard/:path*"],
+};

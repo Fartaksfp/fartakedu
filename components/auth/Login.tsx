@@ -1,5 +1,4 @@
 "use client";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { PhoneInput } from "./PhoneInput";
@@ -74,20 +73,27 @@ function Login({ setIsOpen }: ModalProps) {
       setLoading(true);
       setError(null);
 
-      const result = await signIn("credentials", {
-        phone,
-        otp,
-        redirect: false,
+      const result = await fetch("/api/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          phone: phone,
+          otp: otp,
+        }),
       });
 
-      if (result?.error) {
+      const data = await result.json();
+      
+      if (data.success === false) {
         throw new Error("کد وارد شده صحیح نمی‌باشد");
+      } else {
+        if (setIsOpen) {
+          setIsOpen(false);
+        }
+        router.push("/dashboard");
       }
-
-      if (setIsOpen) {
-        setIsOpen(false);
-      }
-      router.push("/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : "خطا در تایید کد");
       setLoading(false);
