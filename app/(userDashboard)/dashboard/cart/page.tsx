@@ -1,20 +1,25 @@
 "use client";
-import { courseType } from "@/features/courses/types/course";
-import { ShoppingBasket, X } from "lucide-react";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 import { cartType } from "@/features/dashboard/cart/cartType";
-import { removeCourseFromCart } from "@/data-layer/cart/removeCourseFromCart";
 import { SendPayment } from "@/data-layer/payment/SendPayment";
 import { getUser } from "@/data-layer/user/getUser";
-import { UserInfoPayload } from "@/types/userInfo";
 import { getCart } from "@/data-layer/cart/getCart";
+import { handleDeleteCourse } from "@/helpers/cart/handleDeleteCourse";
+import { UserInfoPayload } from "@/types/userInfo";
+import { CartContainer } from "@/features/dashboard/cart/components/CartContainer";
+import { CartLoading } from "@/features/dashboard/cart/components/CartLoading";
+import { EmptyCart } from "@/features/dashboard/cart/components/EmptyCart";
 
-export default function Page() {
+const PAGE_TITLE = "پنل کاربری | سبد خرید";
+
+export default function CartPage() {
   const [user, setUser] = useState<UserInfoPayload | null>(null);
   const [cart, setCart] = useState<cartType[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = PAGE_TITLE;
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -25,28 +30,19 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    document.title = "پنل کاربری | سبد خرید";
-  }, []);
-
-  useEffect(() => {
     if (!user) return;
 
     const fetchCart = async () => {
-      const data = await getCart(user.user_id);
-      setCart(data.res);
-      setLoading(false);
+      try {
+        const data = await getCart(user.user_id);
+        setCart(data.res);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchCart();
   }, [user]);
-
-  const handleDeleteCourse = async (courseId: string) => {
-    if (cart.length === 0) return;
-
-    const cartId = cart[0].uuid;
-    const updatedCart = await removeCourseFromCart(cartId, courseId);
-    setCart(updatedCart);
-  };
 
   const handleCheckout = () => {
     if (cart.length === 0 || !user) return;
@@ -54,22 +50,11 @@ export default function Page() {
   };
 
   if (loading) {
-    return (
-      <div className="h-[500px] flex justify-center items-center">
-        در حال بارگذاری...
-      </div>
-    );
+    return <CartLoading />;
   }
 
   if (cart.length === 0) {
-    return (
-      <div className="h-[500px] flex flex-col gap-5 justify-center items-center px-4">
-        <ShoppingBasket size={150} />
-        <h2 className="text-2xl md:text-4xl text-center">
-          سبد خرید شما خالی است :(
-        </h2>
-      </div>
-    );
+    return <EmptyCart />;
   }
 
   return (
@@ -78,72 +63,15 @@ export default function Page() {
         سبد خرید شما
       </h1>
 
-      {cart.map((cartItem: cartType) => (
-        <div
+      {cart.map((cartItem) => (
+        <CartContainer
           key={cartItem.uuid}
-          className="border rounded-lg p-4 mb-6 shadow-sm"
-        >
-          <div className="space-y-4">
-            {cartItem.courses?.map((course: courseType) => (
-              <div
-                key={course.id}
-                className="flex flex-col sm:flex-row border-2 rounded-4xl p-4 sm:p-5 items-center gap-4 relative"
-              >
-                <X
-                  size={16}
-                  className="self-end sm:self-auto cursor-pointer"
-                  onClick={() => handleDeleteCourse(course.id)}
-                />
-                <div className="w-full sm:w-30 h-55 sm:h-30 flex-shrink-0 bg-gray-100 rounded-2xl overflow-hidden relative">
-                  <Image
-                    src={course.image}
-                    alt={course.title}
-                    fill
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <div className="flex-1 flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 sm:mt-0 w-full">
-                  <h2 className="text-lg font-semibold">{course.title}</h2>
-                  <p className="text-xl sm:text-2xl font-medium mt-2 sm:mt-0">
-                    {course.price.toLocaleString()} تومان
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <hr className="mt-5" />
-          <div className="mt-6 flex flex-col items-end">
-            <p className="text-xl sm:text-2xl font-bold">
-              جمع کل: {cartItem.total.toLocaleString()} تومان
-            </p>
-            <p
-              className={
-                "text-sm font-medium " +
-                (cartItem.status === "pending"
-                  ? "text-yellow-600"
-                  : "text-green-600")
-              }
-            >
-              وضعیت:{" "}
-              {cartItem.status === "pending"
-                ? "در انتظار پرداخت"
-                : "پرداخت شده"}
-            </p>
-          </div>
-
-          {cartItem.status === "pending" && (
-            <div className="mt-4 flex flex-col items-end gap-3">
-              <Button
-                className="w-full sm:w-50 text-lg sm:text-xl h-12"
-                onClick={handleCheckout}
-              >
-                پرداخت
-              </Button>
-            </div>
-          )}
-        </div>
+          cartItem={cartItem}
+          onDeleteCourse={handleDeleteCourse}
+          cart={cart}
+          setCart={setCart}
+          onCheckout={handleCheckout}
+        />
       ))}
     </div>
   );
