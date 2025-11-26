@@ -1,21 +1,7 @@
+import { UserInfoPayload } from "@/types/userInfo";
 import React from "react";
 
-interface UserInfoData {
-  first_name: string;
-  last_name: string;
-  age: number;
-  phone: string;
-  company_name: string;
-  courses_count?: number;
-  certificates_count?: number;
-  registered_at?: string;
-}
-
-interface UserInfoProps {
-  data: UserInfoData;
-}
-
-function UserInfo({ data }: UserInfoProps) {
+function UserInfo({data} : {data:UserInfoPayload}) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div>

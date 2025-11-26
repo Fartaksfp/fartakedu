@@ -1,7 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import {
@@ -15,11 +14,21 @@ import {
   InferOutput,
 } from "valibot";
 import { Button } from "@/components/ui/button";
-import { useAddUser } from "@/hooks/user/userMutations";
+import { getUser } from "@/data-layer/user/getUser";
+import { UserInfoPayload } from "@/types/userInfo";
+import { addUser } from "@/data-layer/user/addUser";
 
-function UserForm() {
-  const { data: session } = useSession();
+function UserForm({ refresh }: { refresh: () => void }) {
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<UserInfoPayload | null>(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const res = await getUser();
+      setUser(res);
+    }
+    fetchUser();
+  }, []);
 
   const userInfoSchema = object({
     first_name: pipe(
@@ -47,25 +56,18 @@ function UserForm() {
     resolver: valibotResolver(userInfoSchema),
   });
 
-  const { mutate: addUser } = useAddUser();
+  const onSubmit = async (values: UserInfoForm) => {
+    const payload = {
+      ...values,
+      user_id: user!.user_id,
+      phone: user!.phone,
+    };
 
-  const onSubmit = (values: UserInfoForm) => {
-    setLoading(true)
-    addUser(
-      {
-        ...values,
-        user_id: session!.user.id,
-        phone: session!.user.phone,
-      },
-      {
-        onSuccess: () => {
-          setLoading(false)
-        },
-        onError: (err) => {
-          console.error("❌ خطا:", err.message);
-        },
-      }
-    );
+    setLoading(true);
+    await addUser(payload);
+    setLoading(false);
+
+    refresh();
   };
 
   return (
@@ -110,9 +112,9 @@ function UserForm() {
       </div>
       <div>
         <label>شماره تلفن</label>
-        <p
-          className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500"
-        >{session?.user?.phone}</p>
+        <p className="mt-2 border-2 h-9 py-[6px] pr-3 rounded-md border-gray-500">
+          {user?.phone}
+        </p>
       </div>
       <div>
         <label>نام شرکت</label>

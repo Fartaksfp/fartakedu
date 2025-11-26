@@ -1,26 +1,32 @@
 "use client";
-import { useSession } from "next-auth/react";
-import SkeletonForm from "@/features/dashboard/profile/SkeletonForm";
-import { useUser } from "@/hooks/user/useUser";
+import { useEffect, useState } from "react";
+import UserForm from "@/features/dashboard/profile/UserForm";
 import UserInfo from "@/features/dashboard/profile/UserInfo";
-import { useEffect } from "react";
+import { getUser } from "@/data-layer/user/getUser";
+import { UserInfoPayload } from "@/types/userInfo";
+import SkeletonForm from "@/features/dashboard/profile/SkeletonForm";
 
-function Page() {
+export default function Page() {
+  const [user, setUser] = useState<UserInfoPayload | null>(null);
+
+  const fetchUserData = async () => {
+    const data = await getUser();
+    setUser(data);
+  };
+
   useEffect(() => {
-    document.title = "پروفایل کاربر";
+    fetchUserData();
   }, []);
 
-  const { data: session } = useSession();
+  if (!user) return <SkeletonForm />;
 
-  const userId = session?.user?.id;
-
-  const { data, isLoading, isError, error } = useUser(userId);
-
-  if (isLoading) return <SkeletonForm />;
-  if (isError) return <p>خطا در دریافت اطلاعات کاربر: {String(error)}</p>;
-  if (data?.success === true && data.res) {
-    return <UserInfo data={data.res} />;
-  }
+  return !user.first_name ? (
+    <>
+      <UserForm refresh={fetchUserData} />
+    </>
+  ) : (
+    <>
+      <UserInfo data={user} />
+    </>
+  );
 }
-
-export default Page;

@@ -1,4 +1,5 @@
-import supabase from "@/lib/supabaseClient";
+
+import { supabase } from "@/utils/supabase/client";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -31,7 +32,7 @@ export async function GET(req: Request) {
       );
     }
 
-    return NextResponse.json({ success: true, res: data }, { status: 200 });
+    return NextResponse.json({ success: true, user: data }, { status: 200 });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return NextResponse.json(
@@ -65,6 +66,7 @@ export async function POST(req: Request) {
     });
 
     if (error) {
+      console.log(error);
       if (error.code === '23505') {
         return NextResponse.json({ success: false, message: "کاربر تکراری" },
           { status: 500 })
@@ -77,6 +79,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ res }, { status: 200 })
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ success: false, message: error },
       { status: 500 })
   }
