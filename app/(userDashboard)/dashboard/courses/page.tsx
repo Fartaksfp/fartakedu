@@ -1,6 +1,6 @@
 import CourseCard from "@/features/courses/components/CourseCard";
 import { courseType } from "@/features/courses/types/course";
-import { getCourses } from "@/hooks/course/getCourses";
+import { getCourses } from "@/data-layer/course/getCourses";
 import React from "react";
 
 async function page() {

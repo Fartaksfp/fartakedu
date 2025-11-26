@@ -2,7 +2,7 @@ import React from "react";
 import CourseCard from "@/features/courses/components/CourseCard";
 import { courseType } from "@/features/courses/types/course";
 import { Metadata } from "next";
-import { getCourses } from "@/hooks/course/getCourses";
+import { getCourses } from "@/data-layer/course/getCourses";
 
 export const dynamic = 'force-dynamic'
 

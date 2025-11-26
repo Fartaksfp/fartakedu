@@ -1,4 +1,5 @@
-import supabase from "@/lib/supabaseClient";
+
+import { supabase } from "@/utils/supabase/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -44,7 +45,7 @@ export async function GET(req: Request) {
 export async function POST(req: NextRequest) {
   const body = await req.json()
 
-  const { data, error } = await supabase.rpc("add_to_cart", {
+  const { error } = await supabase.rpc("add_to_cart", {
     p_course_id: body.course,
     p_user_id: body.userId
   });

@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { courseType } from "@/features/courses/types/course";
-import { getCourses } from "@/hooks/course/getCourses";
+import { getCourses } from "@/data-layer/course/getCourses";
 
 async function FeaturedCourses() {
   const data = await getCourses(4);

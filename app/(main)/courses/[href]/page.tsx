@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, BookOpen, User } from "lucide-react";
-import { getCourse } from "@/hooks/course/getCourse";
+import { getCourse } from "@/data-layer/course/getCourse";
 import { notFound } from "next/navigation";
 
 async function page({ params }: { params: Promise<{ href: string }> }) {
