@@ -3,6 +3,11 @@ import { courseType } from "@/features/courses/types/course";
 import { getCourses } from "@/data-layer/course/getCourses";
 import React from "react";
 
+export const metadata = {
+  title: "پنل کاربری | دوره‌ها",
+  description: "صفحه دوره‌ها در پنل کاربری",
+};
+
 async function page() {
   const res = await getCourses();
   if (res.status >= 400) {

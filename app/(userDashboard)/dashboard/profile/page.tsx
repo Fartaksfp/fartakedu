@@ -15,6 +15,7 @@ export default function Page() {
   };
 
   useEffect(() => {
+    document.title = "پنل کاربری | پروفایل";
     fetchUserData();
   }, []);
 
