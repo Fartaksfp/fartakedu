@@ -6,7 +6,6 @@ import { CartSummary } from "./CartSummary";
 
 interface CartContainerProps {
   cartItem: cartType;
-  onDeleteCourse: (courseId: string, cart: cartType[], setCart: React.Dispatch<React.SetStateAction<cartType[]>>) => void;
   cart: cartType[];
   setCart: React.Dispatch<React.SetStateAction<cartType[]>>;
   onCheckout: () => void;
@@ -14,7 +13,6 @@ interface CartContainerProps {
 
 export function CartContainer({
   cartItem,
-  onDeleteCourse,
   cart,
   setCart,
   onCheckout,
@@ -26,7 +24,6 @@ export function CartContainer({
           <CartItem
             key={course.id}
             course={course}
-            onDelete={onDeleteCourse}
             cart={cart}
             setCart={setCart}
           />

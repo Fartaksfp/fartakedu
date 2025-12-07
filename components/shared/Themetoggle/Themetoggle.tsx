@@ -12,7 +12,7 @@ function Themetoggle() {
     if (theme === "dark" && !darkMode) {
       toggleTheme();
     }
-  }, [darkMode, toggleTheme]);
+  }, []);
 
   useEffect(() => {
     if (darkMode) {

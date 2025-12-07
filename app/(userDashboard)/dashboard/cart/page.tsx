@@ -4,7 +4,6 @@ import { cartType } from "@/features/dashboard/cart/cartType";
 import { SendPayment } from "@/data-layer/payment/SendPayment";
 import { getUser } from "@/data-layer/user/getUser";
 import { getCart } from "@/data-layer/cart/getCart";
-import { handleDeleteCourse } from "@/helpers/cart/handleDeleteCourse";
 import { UserInfoPayload } from "@/types/userInfo";
 import { CartContainer } from "@/features/dashboard/cart/components/CartContainer";
 import { CartLoading } from "@/features/dashboard/cart/components/CartLoading";
@@ -67,7 +66,6 @@ export default function CartPage() {
         <CartContainer
           key={cartItem.uuid}
           cartItem={cartItem}
-          onDeleteCourse={handleDeleteCourse}
           cart={cart}
           setCart={setCart}
           onCheckout={handleCheckout}

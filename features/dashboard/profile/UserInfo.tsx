@@ -23,6 +23,12 @@ function UserInfo({ data }: { data: UserInfoPayload }) {
         </p>
       </div>
       <div>
+        <label>کد ملی</label>
+        <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
+          {data.national_code}
+        </p>
+      </div>
+      <div>
         <label>شماره تلفن</label>
         <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
           {data.phone}
@@ -30,7 +36,7 @@ function UserInfo({ data }: { data: UserInfoPayload }) {
       </div>
       <div>
         <label>نام شرکت</label>
-        <p className="mt-2 border-2 py-[17px] pr-3 rounded-md border-gray-500">
+        <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
           {data.company_name}
         </p>
       </div>

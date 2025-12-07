@@ -3,6 +3,7 @@ export interface UserInfoPayload {
   first_name: string;
   last_name: string;
   age: number;
+  national_code: number;
   company_name?: string;
   courses_count?: number;
   certificates_count?: number;

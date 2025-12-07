@@ -61,6 +61,17 @@ export default function UserFormFields({
       </div>
 
       <div>
+        <label>کد ملی</label>
+        <Input
+          className="mt-2 border-2 border-gray-500"
+          {...register("national_code", { valueAsNumber: true })}
+        />
+        {errors.national_code && (
+          <p className="text-red-500 mt-4 text-sm">{errors.national_code.message}</p>
+        )}
+      </div>
+
+      <div>
         <label>شماره تلفن</label>
         <p className="mt-2 border-2 h-9 py-[6px] pr-3 rounded-md border-gray-500">
           {user?.phone}

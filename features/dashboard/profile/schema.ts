@@ -22,6 +22,9 @@ export const userInfoSchema = object({
     number("سن باید عدد باشد"),
     minValue(18, "سن حداقل باید 18 باشد"),
   ),
+  national_code: pipe(
+    number("کد ملی باید عدد باشد"),
+  ),
   company_name: optional(string("باید حروف باشد")),
 });
 

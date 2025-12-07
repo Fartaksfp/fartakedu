@@ -43,13 +43,14 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { user_id, first_name, last_name, age, phone, company_name } =
+    const { user_id, first_name, last_name, age, phone, company_name, national_code } =
       await req.json();
-
+      
     const { data, error } = await supabase.rpc("insert_user_info", {
       p_user_id: user_id,
       p_first_name: first_name,
       p_last_name: last_name,
+      p_national_code: national_code,
       p_age: age,
       p_courses_count: 0,
       p_certificates_count: 0,
@@ -58,6 +59,8 @@ export async function POST(req: Request) {
     });
 
     if (error) {
+      console.log(error);
+      
       if (error.code === "23505") {
         return NextResponse.json(
           { success: false, message: "کاربر تکراری" },
