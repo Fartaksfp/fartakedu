@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
   const paymentData = JSON.parse(payment);
   const state = String(paymentData.state);
 
+  console.log(state);
+
   if (state === "CanceledByUser") {
     const resnum = paymentData.ResNum;
 
