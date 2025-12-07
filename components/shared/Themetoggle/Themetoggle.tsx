@@ -6,14 +6,13 @@ import useTheme from "@/stores/useTheme";
 function Themetoggle() {
   const darkMode = useTheme((state) => state.darkMode);
   const toggleTheme = useTheme((state) => state.toggleTheme);
-
+  
   useEffect(() => {
     const theme = localStorage.getItem("theme");
-    if (theme === "dark") {
+    if (theme === "dark" && !darkMode) {
       toggleTheme();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [darkMode, toggleTheme]);
 
   useEffect(() => {
     if (darkMode) {
