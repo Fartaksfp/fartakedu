@@ -46,9 +46,8 @@ export default function PaymentCard() {
       const value = decodeURIComponent(cookie.split("=")[1]);
       setPaymentData(JSON.parse(value));
     }
-    fetch("/api/delete-p");
+    fetch("/api/rvp");
   }, []);
-
 
   if (!paymentData) {
     return (
