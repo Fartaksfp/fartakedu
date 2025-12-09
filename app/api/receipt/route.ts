@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   cookieStore.set({ name: "payment", value: JSON.stringify(body), path: "/" });
 
   const paymentData = body;
-  const state = String(paymentData.state);
+  const state = String(paymentData.State);
 
   if (state === "CanceledByUser") {
     const resnum = paymentData.ResNum;
