@@ -88,7 +88,7 @@ export default function PaymentCard() {
         </p>
         <p className="text-lg mb-2">
           <strong>مبلغ پرداخت شده:</strong>{" "}
-          {Number(paymentData.Amount).toLocaleString()} تومان
+          {Number(String(paymentData.Amount).slice(0,-1)).toLocaleString()} تومان
         </p>
         <p className="text-lg mb-2">
           <strong>تاریخ پرداخت:</strong> {new Date().toLocaleString("fa-IR")}
