@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase/server";
+import { supabase } from "@/utils/supabase/client";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
