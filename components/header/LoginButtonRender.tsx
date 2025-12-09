@@ -1,11 +1,19 @@
-"use server";
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import LoginDialog from "./Buttons/LoginDialog";
 import DashboardButton from "./Buttons/DashboardButton";
 import { getSession } from "@/data-layer/user/getSession";
 
-async function LoginButtonRender() {
-  const session = await getSession();
+function LoginButtonRender() {
+  const [session, setsession] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      setsession(session);
+    };
+
+    fetchSession();
+  }, []);
 
   return (
     <div>{session === "valid" ? <DashboardButton /> : <LoginDialog />}</div>
