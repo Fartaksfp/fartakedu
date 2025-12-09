@@ -1,21 +1,23 @@
-"use client";
-
-import { useSession } from "next-auth/react";
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import LoginDialog from "./Buttons/LoginDialog";
 import DashboardButton from "./Buttons/DashboardButton";
-import { Skeleton } from "../ui/skeleton";
+import { getSession } from "@/data-layer/user/getSession";
 
 function LoginButtonRender() {
-  const { data: session, status } = useSession();
+  const [session, setsession] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      setsession(session);
+    };
 
-  if (status === "loading") {
-    return (
-      <Skeleton className="w-40 h-10" />
-    );
-  }
+    fetchSession();
+  }, []);
 
-  return <div>{session ? <DashboardButton /> : <LoginDialog />}</div>;
+  return (
+    <div>{session === "valid" ? <DashboardButton /> : <LoginDialog />}</div>
+  );
 }
 
 export default LoginButtonRender;

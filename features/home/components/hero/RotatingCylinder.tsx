@@ -31,7 +31,7 @@ function RotatingCylinder() {
   return (
     <div
       className="overflow-hidden h-[3rem] my-5 sm:my-0 flex mx-2 sm:-mt-1 transition-all duration-700 items-start justify-center"
-      style={{ width: itemWidth + 'px' }}
+      style={{ width: itemWidth + "px" }}
     >
       <div
         className="transition-transform duration-700 ease-in-out"

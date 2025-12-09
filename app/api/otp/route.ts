@@ -1,4 +1,4 @@
-import supabase from "@/lib/supabaseClient";
+import { supabase } from "@/utils/supabase/client";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     if (!phone_e164) {
       return NextResponse.json(
         { error: "Phone Number Not Send!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -18,19 +18,13 @@ export async function POST(req: Request) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to: phone_e164 }),
-      }
+      },
     );
-    
+
     const result = await melipayamakRes.json();
 
-    console.log(result);
-    
-
     if (!melipayamakRes.ok) {
-      return NextResponse.json(
-        { error: "Provider Error!" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Provider Error!" }, { status: 500 });
     }
 
     const otp_code = result.code;
@@ -52,13 +46,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ success: 'true' });
+    return NextResponse.json({ success: "true" });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Server Error:", error);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

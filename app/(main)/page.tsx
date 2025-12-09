@@ -1,4 +1,3 @@
-
 import Benefits from "@/features/home/components/benefits/Benefits";
 import LastCta from "@/features/home/components/cta/LastCta";
 import FeaturedCourses from "@/features/home/components/featuredCourses/FeaturedCourses";

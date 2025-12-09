@@ -13,16 +13,16 @@ const linkCategories = [
   {
     title: "پشتیبانی",
     links: [
-      { name: "سوالات متداول", href: "/faq" },
-      { name: "پشتیبانی", href: "/support" },
+      { name: "سوالات متداول", href: "/#" },
+      { name: "پشتیبانی", href: "/#" },
       { name: "تماس با ما", href: "/contact" },
     ],
   },
   {
     title: "قوانین و سیاست‌ها",
     links: [
-      { name: "سیاست حفظ حریم خصوصی", href: "/privacy" },
-      { name: "شرایط و قوانین", href: "/terms" },
+      { name: "سیاست حفظ حریم خصوصی", href: "/#" },
+      { name: "شرایط و قوانین", href: "/#" },
     ],
   },
 ];
@@ -31,7 +31,10 @@ function FooterLinks() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
       {linkCategories.map((category) => (
-        <div key={category.title} className="flex flex-col justify-center items-center gap-2">
+        <div
+          key={category.title}
+          className="flex flex-col justify-center items-center gap-2"
+        >
           <h4 className="font-semibold mb-2">{category.title}</h4>
           {category.links.map((link) => (
             <Link

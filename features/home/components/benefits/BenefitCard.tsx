@@ -27,13 +27,9 @@ function BenefitCard({
         {IconComponent && <IconComponent className="w-8 h-8 text-primary" />}
       </div>
 
-      <div className="text-2xl sm:text-3xl font-bold mb-1">
-        {number}
-      </div>
+      <div className="text-2xl sm:text-3xl font-bold mb-1">{number}</div>
 
-      <div className="text-center text-sm sm:text-base font-medium">
-        {name}
-      </div>
+      <div className="text-center text-sm sm:text-base font-medium">{name}</div>
     </div>
   );
 }

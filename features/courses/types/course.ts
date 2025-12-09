@@ -1,10 +1,13 @@
-type CourseType = {
-  name: string;
+export interface courseType {
+  id: string;
+  title: string;
   description: string;
-  duration: number;
-  students: number;
-  price: number;
+  teacher: string;
   image: string;
-};
-
-export default CourseType;
+  price: number;
+  status: string;
+  created_at: string;
+  students: number;
+  duration: number;
+  href: string;
+}

@@ -24,7 +24,6 @@ export function OtpInput({
   error,
   loading,
 }: OtpInputProps) {
-
   return (
     <div className="flex flex-col gap-5 justify-center items-center">
       <InputOTP
