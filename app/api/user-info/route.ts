@@ -9,7 +9,7 @@ export async function GET(req: Request) {
     if (!user_id) {
       return NextResponse.json(
         { success: false, message: "user_id is required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -20,14 +20,14 @@ export async function GET(req: Request) {
     if (error) {
       return NextResponse.json(
         { success: false, message: error.message },
-        { status: 500 },
+        { status: 500 }
       );
     }
 
     if (!data) {
       return NextResponse.json(
         { success: false, message: "User not found" },
-        { status: 200 },
+        { status: 200 }
       );
     }
 
@@ -36,21 +36,34 @@ export async function GET(req: Request) {
   } catch (error: any) {
     return NextResponse.json(
       { success: false, message: error.message || "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
 export async function POST(req: Request) {
   try {
-    const { user_id, first_name, last_name, age, phone, company_name, national_code } =
-      await req.json();
-      
+    const {
+      user_id,
+      first_name,
+      last_name,
+      age,
+      phone,
+      company_name,
+      national_code,
+    } = await req.json();
+
+    let finalNationalCode;
+
+    if (national_code.length < 10) {
+      finalNationalCode = national_code.padStart(10, "0");
+    }
+
     const { data, error } = await supabase.rpc("insert_user_info", {
       p_user_id: user_id,
       p_first_name: first_name,
       p_last_name: last_name,
-      p_national_code: national_code,
+      p_national_code: finalNationalCode,
       p_age: age,
       p_courses_count: 0,
       p_certificates_count: 0,
@@ -60,16 +73,16 @@ export async function POST(req: Request) {
 
     if (error) {
       console.log(error);
-      
+
       if (error.code === "23505") {
         return NextResponse.json(
           { success: false, message: "کاربر تکراری" },
-          { status: 500 },
+          { status: 500 }
         );
       }
       return NextResponse.json(
         { success: false, message: error },
-        { status: 500 },
+        { status: 500 }
       );
     }
 
@@ -79,7 +92,7 @@ export async function POST(req: Request) {
   } catch (error) {
     return NextResponse.json(
       { success: false, message: error },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

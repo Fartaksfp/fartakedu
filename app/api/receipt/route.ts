@@ -7,24 +7,23 @@ export async function POST(request: NextRequest) {
   const cookieStore = await cookies();
   const text = await request.text();
   const body = Object.fromEntries(new URLSearchParams(text));
-  console.log("Received body:", body);
 
   cookieStore.set({ name: "payment", value: JSON.stringify(body), path: "/" });
 
   const paymentData = body;
   const state = String(paymentData.State);
 
-  if (state === "CanceledByUser") {
-    console.log(state);
+  if (state === "OK") {
     
     const resnum = paymentData.ResNum;
-    console.log(resnum);
 
     const { data: updatedCart, error: updateError } = await (await supabase)
       .from("cart")
       .update({ status: "completed" })
       .eq("uuid", resnum)
       .select();
+    
+    console.log(updatedCart);
 
     if (updateError) {
       console.error(updateError);
