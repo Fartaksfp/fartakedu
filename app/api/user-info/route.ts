@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       national_code,
     } = await req.json();
 
-    let finalNationalCode;
+    let finalNationalCode = national_code;
 
     if (national_code.length < 10) {
       finalNationalCode = national_code.padStart(10, "0");
