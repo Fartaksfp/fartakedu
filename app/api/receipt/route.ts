@@ -7,11 +7,11 @@ export async function POST(request: NextRequest) {
   const cookieStore = await cookies();
   const text = await request.text();
   const body = Object.fromEntries(new URLSearchParams(text));
+  console.log("Received body:", body);
 
   cookieStore.set({ name: "payment", value: JSON.stringify(body), path: "/" });
 
-  const payment = decodeURIComponent(JSON.stringify(body).split("=")[1]);
-  const paymentData = JSON.parse(payment);
+  const paymentData = body;
   const state = String(paymentData.state);
 
   if (state === "CanceledByUser") {
