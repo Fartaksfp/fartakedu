@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     body: JSON.stringify({
       action: "token",
       TerminalId: process.env.SEP_TERMINAL_ID,
-      Amount: body.amount,
+      Amount: Number(body.amount + '0'),
       ResNum: body.resNumber,
       RedirectUrl: "https://academy.fartaksfp.com/api/receipt",
       CellNumber: body.phoneNumber,
