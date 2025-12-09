@@ -15,7 +15,10 @@ export async function POST(request: NextRequest) {
   const state = String(paymentData.State);
 
   if (state === "CanceledByUser") {
+    console.log(state);
+    
     const resnum = paymentData.ResNum;
+    console.log(resnum);
 
     const { data: updatedCart, error: updateError } = await (await supabase)
       .from("cart")
