@@ -11,7 +11,8 @@ async function page({
 
   const session = await getSession();
 
-  function redirectToDashboard() {
+  async function redirectToDashboard() {
+    'use server'
     if (url) {
       redirect(url);
     }
