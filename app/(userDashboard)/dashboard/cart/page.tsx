@@ -65,7 +65,7 @@ export default function CartPage() {
       }
     });
 
-    SendPayment(cart[0].uuid, user.phone!, discount_on_cart);
+    SendPayment(cart[0].uuid, user.phone!, cartItem.total - discount_on_cart);
   };
 
   if (loading) {
