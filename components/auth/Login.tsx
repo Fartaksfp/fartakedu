@@ -94,8 +94,7 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
         if (setIsOpen) {
           setIsOpen(false);
         }
-        router.push(data.callbackurl);
-        router.refresh();
+        router.replace(data.callbackurl);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "خطا در تایید کد");

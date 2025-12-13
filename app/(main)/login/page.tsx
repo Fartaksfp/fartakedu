@@ -11,8 +11,12 @@ async function page({
   
   const session = await getSession();
 
-  if (session) {
-    redirect("/dashboard");
+  if (session && url) {
+    redirect(url);
+  } 
+
+  if (session){
+    redirect("/dashboard")
   }
 
   return (

@@ -17,14 +17,14 @@ export async function POST(req: NextRequest) {
   if (data.success === false) {
     return NextResponse.json(
       { success: false, message: data.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 
   if (error) {
     return NextResponse.json(
       { success: false, message: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       sameSite: "lax",
     });
 
-    return NextResponse.redirect(body.callbackurl);
+    return NextResponse.json({ success: true, callbackurl: body.callbackurl }, { status: 200 });
   } else {
     return NextResponse.json({ users_error }, { status: 500 });
   }
