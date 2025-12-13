@@ -82,6 +82,7 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
         body: JSON.stringify({
           phone: phone,
           otp: otp,
+          callbackurl: callbackurl ? callbackurl : "/dashboard",
         }),
       });
 
@@ -93,11 +94,8 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
         if (setIsOpen) {
           setIsOpen(false);
         }
-        if (typeof callbackurl === "string" && callbackurl.length > 0) {
-          router.replace(callbackurl);
-        } else {
-          router.replace("/dashboard");
-        }
+        router.replace(data.callbackurl);
+        router.refresh();
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "خطا در تایید کد");
