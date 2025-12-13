@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Clock, Users, BookOpen, User } from "lucide-react";
 import { getCourse } from "@/data-layer/course/getCourse";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 async function page({ params }: { params: Promise<{ href: string }> }) {
   const { href } = await params;
@@ -92,9 +93,11 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
               </div>
 
               <div className="pt-6">
-                <Button size="lg" className="w-full sm:w-auto">
-                  ثبت نام در دوره
-                </Button>
+                <Link href={`/dashboard/courses/${course.href}`}>
+                  <Button size="lg" className="w-full sm:w-auto">
+                    ثبت نام در دوره
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

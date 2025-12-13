@@ -6,9 +6,10 @@ import { OtpInput } from "./OtpInput";
 
 interface ModalProps {
   setIsOpen?: Dispatch<SetStateAction<boolean>>;
+  callbackurl?: string;
 }
 
-function Login({ setIsOpen }: ModalProps) {
+function Login({ setIsOpen, callbackurl }: ModalProps) {
   const [phone, setPhone] = useState<string>("");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
@@ -92,7 +93,11 @@ function Login({ setIsOpen }: ModalProps) {
         if (setIsOpen) {
           setIsOpen(false);
         }
-        router.push("/dashboard");
+        if (callbackurl){
+          router.push(callbackurl);
+        } else {
+          router.push("/dashboard")
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "خطا در تایید کد");
