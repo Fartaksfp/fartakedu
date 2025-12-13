@@ -94,7 +94,7 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
         if (setIsOpen) {
           setIsOpen(false);
         }
-        router.replace(data.callbackurl);
+        router.push(data.callbackurl);
         router.refresh();
       }
     } catch (err) {
