@@ -53,10 +53,7 @@ export async function POST(req: NextRequest) {
       sameSite: "lax",
     });
 
-    return NextResponse.json(
-      { success: true, callbackurl: body.callbackurl },
-      { status: 200 }
-    );
+    return NextResponse.redirect(body.callbackurl);
   } else {
     return NextResponse.json({ users_error }, { status: 500 });
   }
