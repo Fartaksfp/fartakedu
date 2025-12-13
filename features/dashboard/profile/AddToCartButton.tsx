@@ -2,12 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { getUser } from "@/data-layer/user/getUser";
 import { UserInfoPayload } from "@/types/userInfo";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 function AddToCartButton({ id }: { id: string }) {
   const [user, setuser] = useState<UserInfoPayload>();
+  const pathname = usePathname()
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -20,7 +21,7 @@ function AddToCartButton({ id }: { id: string }) {
   const addToCart = async (courseId: string) => {
     if(!user?.first_name) {
       toast.error('لطفا اطلاعات خود را وارد کنید')
-      redirect('/dashboard/profile')
+      redirect(`/dashboard/profile?course=${pathname}`)
     }
 
     await toast.promise(
