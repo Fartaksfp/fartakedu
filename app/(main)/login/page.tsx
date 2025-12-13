@@ -2,9 +2,13 @@ import Login from "@/components/auth/Login";
 import { getSession } from "@/data-layer/user/getSession";
 import { redirect } from "next/navigation";
 
-async function page({ searchParams }: { searchParams: Promise<{ url: string }> }) {
-  const { url } = await searchParams;
-
+async function page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>
+}) {
+  const url = (await searchParams).url
+  
   const session = await getSession();
 
   if (session) {

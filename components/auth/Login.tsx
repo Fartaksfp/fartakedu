@@ -93,6 +93,8 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
         if (setIsOpen) {
           setIsOpen(false);
         }
+        console.log(callbackurl);
+        
         if (callbackurl){
           router.push(callbackurl);
         } else {
