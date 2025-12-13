@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
 import Image from "next/image";
-import { Clock, Users, BookOpen, User } from "lucide-react";
+import { Clock, Users, User, CalendarRange } from "lucide-react";
 import { getCourse } from "@/data-layer/course/getCourse";
 import { notFound } from "next/navigation";
 import AddToCartButton from "@/features/dashboard/profile/AddToCartButton";
+import { toShamsi } from "@/helper/toShamsi";
 
 export async function generateMetadata({
   params,
@@ -38,12 +39,13 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
     return <div>خطا در دریافت اطلاعات</div>;
   }
   const course = await data?.coursesdata;
+  const courseDate = toShamsi(course.created_at);
 
   if (data?.status === 404) {
     notFound();
   } else {
     return (
-      <div className="container mx-auto">
+      <div className="container sm:px-6 lg:px-8">
         <Suspense
           fallback={
             <div className="flex items-center justify-center min-h-[60vh]">
@@ -51,9 +53,9 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
             </div>
           }
         >
-          <div className="grid grid-cols-1 dark:border-gray-500 py-10 border-2 h-120 lg:grid-cols-3 gap-8 rounded-xl px-6 shadow-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 border-2 dark:border-gray-500 rounded-xl shadow-lg py-6 lg:py-10 px-4 lg:px-6">
             <div className="lg:col-span-1">
-              <div className="relative h-full w-full overflow-hidden rounded-xl">
+              <div className="relative w-full h-80 sm:h-80 md:h-96 lg:h-full overflow-hidden rounded-xl">
                 <Image
                   src={course.image}
                   alt={course.title + " تصویر"}
@@ -66,15 +68,18 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
 
             <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
               <div>
-                <h1 className="text-3xl font-bold mb-4">{course.title}</h1>
+                <span className="text-2xl sm:text-3xl font-bold mb-4">
+                  {course.title}
+                </span>
               </div>
+
               <div>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   {course.description}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <div className="p-3 rounded-full bg-primary/10">
                     <User className="w-5 h-5 text-primary" />
@@ -84,6 +89,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
                     <p className="font-medium">{course.teacher}</p>
                   </div>
                 </div>
+
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <div className="p-3 rounded-full bg-primary/10">
                     <Clock className="w-5 h-5 text-primary" />
@@ -108,14 +114,33 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
 
                 <div className="flex items-center space-x-3 rtl:space-x-reverse">
                   <div className="p-3 rounded-full bg-primary/10">
-                    <BookOpen className="w-5 h-5 text-primary" />
+                    <CalendarRange className="w-5 h-5 text-primary" />
                   </div>
-                  <div className="mr-5">
-                    <p className="text-sm text-muted-foreground">قیمت دوره</p>
-                    <p className="font-medium">
-                      {course.price.toLocaleString()} تومان
+                  <div className="mr-3">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      تاریخ برگزاری
+                    </p>
+                    <p className="font-medium text-sm sm:text-base">
+                      {courseDate}
                     </p>
                   </div>
+                </div>
+              </div>
+
+              <div className="flex sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-3 rtl:space-x-reverse mt-4">
+
+                <div className="mr-3 ">
+                  <p className="text-lg sm:text-xl text-muted-foreground">
+                    قیمت دوره
+                  </p>
+                  <p className="font-medium text-lg sm:text-xl">
+                    {course.price.toLocaleString()} تومان
+                  </p>
+                  {course.status === "soon" && (
+                    <p className="text-sm text-muted-foreground mt-1">
+                      تخفیف ویژه مخصوص شرکت ها در سبد خرید اعمال میگردد
+                    </p>
+                  )}
                 </div>
               </div>
 

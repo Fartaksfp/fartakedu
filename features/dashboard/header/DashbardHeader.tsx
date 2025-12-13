@@ -9,7 +9,7 @@ import Link from "next/link";
 function DashbardHeader() {
   return (
     <header className="border-b bg-white dark:bg-slate-950 fixed z-50 w-full">
-      <div className="flex px-10 mx-auto h-16 justify-between items-center ">
+      <div className="flex flex-row-reverse md:flex-row px-10 mx-auto h-16 justify-between items-center ">
         <div className="flex gap-3 md:hidden">
           <SidebarMobile />
           <Link href={"/dashboard/cart"}>

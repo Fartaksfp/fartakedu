@@ -23,8 +23,6 @@ export async function POST(request: NextRequest) {
       .eq("uuid", resnum)
       .select();
     
-    console.log(updatedCart);
-
     if (updateError) {
       console.error(updateError);
       return;
