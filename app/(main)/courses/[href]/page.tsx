@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, BookOpen, User, CalendarRange } from "lucide-react";
+import { Clock, Users, User, CalendarRange } from "lucide-react";
 import { getCourse } from "@/data-layer/course/getCourse";
 import { notFound } from "next/navigation";
 import Link from "next/link";

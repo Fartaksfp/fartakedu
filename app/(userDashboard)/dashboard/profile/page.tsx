@@ -25,6 +25,7 @@ export default function Page() {
   useEffect(() => {
     document.title = "پنل کاربری | پروفایل";
     fetchUserData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!user) return <SkeletonForm />;
