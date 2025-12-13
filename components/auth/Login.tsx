@@ -94,11 +94,11 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
           setIsOpen(false);
         }
         console.log(callbackurl);
-        
-        if (callbackurl){
-          router.push(callbackurl);
+
+        if (callbackurl) {
+          router.replace(callbackurl);
         } else {
-          router.push("/dashboard")
+          router.replace("/dashboard");
         }
       }
     } catch (err) {
