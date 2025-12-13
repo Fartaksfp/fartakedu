@@ -3,12 +3,14 @@ import { courseType } from "@/features/courses/types/course";
 import React from "react";
 import { CartItem } from "./CartItem";
 import { CartSummary } from "./CartSummary";
+import { UserInfoPayload } from "@/types/userInfo";
 
 interface CartContainerProps {
   cartItem: cartType;
   cart: cartType[];
   setCart: React.Dispatch<React.SetStateAction<cartType[]>>;
   onCheckout: () => void;
+  user: UserInfoPayload
 }
 
 export function CartContainer({
@@ -16,6 +18,7 @@ export function CartContainer({
   cart,
   setCart,
   onCheckout,
+  user
 }: CartContainerProps) {
   return (
     <div className="border rounded-lg p-4 mb-6 shadow-sm">
@@ -30,7 +33,7 @@ export function CartContainer({
         ))}
       </div>
 
-      <CartSummary cartItem={cartItem} onCheckout={onCheckout} />
+      <CartSummary cartItem={cartItem} onCheckout={onCheckout} user={user} />
     </div>
   );
 }

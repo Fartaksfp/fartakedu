@@ -51,6 +51,7 @@ export async function POST(req: Request) {
       phone,
       company_name,
       national_code,
+      signup_model
     } = await req.json();
 
     let finalNationalCode = national_code;
@@ -69,6 +70,7 @@ export async function POST(req: Request) {
       p_certificates_count: 0,
       p_phone: phone,
       p_company_name: company_name,
+      p_signup_model:signup_model,
     });
 
     if (error) {

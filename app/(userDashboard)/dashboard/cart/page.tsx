@@ -8,6 +8,7 @@ import { UserInfoPayload } from "@/types/userInfo";
 import { CartContainer } from "@/features/dashboard/cart/components/CartContainer";
 import { CartLoading } from "@/features/dashboard/cart/components/CartLoading";
 import { EmptyCart } from "@/features/dashboard/cart/components/EmptyCart";
+import { toast } from "react-toastify";
 
 const PAGE_TITLE = "پنل کاربری | سبد خرید";
 
@@ -45,7 +46,26 @@ export default function CartPage() {
 
   const handleCheckout = () => {
     if (cart.length === 0 || !user) return;
-    SendPayment(cart[0].uuid, user.phone!, cart[0].total);
+    const cartItem = cart[0];
+
+    if (cartItem.total === 0) {
+      toast.error("سبد خرید شما خالی است");
+      return;
+    }
+
+    let discount_on_cart = 0;
+
+    cartItem.courses.forEach((course) => {
+      if (course.status === "soon") {
+        if (user.signup_model === "مرکز رشد، پیش رشد، کوآپ") {
+          discount_on_cart += (course.price * 80) / 100;
+        } else if (user.signup_model === "شرکت های اراضی و استیجاری") {
+          discount_on_cart += (course.price * 50) / 100;
+        }
+      }
+    });
+
+    SendPayment(cart[0].uuid, user.phone!, discount_on_cart);
   };
 
   if (loading) {
@@ -69,6 +89,7 @@ export default function CartPage() {
           cart={cart}
           setCart={setCart}
           onCheckout={handleCheckout}
+          user={user!}
         />
       ))}
     </div>

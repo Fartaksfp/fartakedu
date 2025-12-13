@@ -5,8 +5,13 @@ import { getCourse } from "@/data-layer/course/getCourse";
 import { notFound } from "next/navigation";
 import AddToCartButton from "@/features/dashboard/profile/AddToCartButton";
 
-export async function generateMetadata({ params }: { params: { href: string } }) {
-  const data = await getCourse(params.href);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ href: string }>;
+}) {
+  const { href } = await params;
+  const data = await getCourse(href);
   if (data?.status >= 400) {
     return {
       title: "خطا در دریافت اطلاعات | فرتاک",

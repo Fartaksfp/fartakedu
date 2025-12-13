@@ -67,7 +67,9 @@ export default function UserFormFields({
           {...register("national_code", { valueAsNumber: true })}
         />
         {errors.national_code && (
-          <p className="text-red-500 mt-4 text-sm">{errors.national_code.message}</p>
+          <p className="text-red-500 mt-4 text-sm">
+            {errors.national_code.message}
+          </p>
         )}
       </div>
 
@@ -84,6 +86,27 @@ export default function UserFormFields({
           className="mt-2 border-2 border-gray-500"
           {...register("company_name")}
         />
+      </div>
+
+      <div>
+        <label htmlFor="signup_model">نوع ثبت نام</label>
+        <select id="signup_model" {...register("signup_model")}
+        className="block w-full dark:bg-black mt-2 dark:text-white appearance-none rounded-lg border border-gray-300 bg-white py-2 px-4 pr-8 text-gray-700 focus:border-blue-500 focus:outline-none  focus:ring-1 focus:ring-blue-500"
+        >
+          <option value="">انتخاب کنید</option>
+          <option value="آزاد">آزاد</option>
+          <option value="مرکز رشد، پیش رشد، کوآپ">
+            مرکز رشد، پیش رشد، کوآپ
+          </option>
+          <option value="شرکت های اراضی و استیجاری">
+            شرکت های اراضی و استیجاری
+          </option>
+        </select>
+        {errors.signup_model && (
+          <p className="text-red-500 mt-4 text-sm">
+            {errors.signup_model.message}
+          </p>
+        )}
       </div>
 
       <Button disabled={loading} type="submit" className="w-full col-span-2">

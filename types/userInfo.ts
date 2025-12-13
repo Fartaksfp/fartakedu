@@ -8,4 +8,5 @@ export interface UserInfoPayload {
   courses_count?: number;
   certificates_count?: number;
   phone?: string;
+  signup_model:string
 }

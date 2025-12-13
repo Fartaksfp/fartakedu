@@ -7,6 +7,8 @@ export async function getCourses(limit?: number) {
   );
 
   if (error) {
+    console.log(error);
+    
     return { error: error.message, status: 500 };
   }
 

@@ -40,6 +40,12 @@ function UserInfo({ data }: { data: UserInfoPayload }) {
           {data.company_name}
         </p>
       </div>
+      <div>
+        <label>نوع ثبت نام</label>
+        <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
+          {data.signup_model}
+        </p>
+      </div>
     </div>
   );
 }
