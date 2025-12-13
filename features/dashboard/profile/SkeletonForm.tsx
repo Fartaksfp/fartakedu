@@ -3,7 +3,7 @@ import React from "react";
 
 function SkeletonForm() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div className="flex flex-col md:grid md:grid-cols-2 gap-5">
       <div>
         <Skeleton className="w-20 h-5 mb-3" />
         <Skeleton className="w-full h-10" />

@@ -5,20 +5,17 @@ export async function middleware(request: NextRequest) {
   const session = await getSession();
 
   if (!session) {
-    return NextResponse.redirect(
-      new URL(`/login?url=${request.nextUrl.pathname}`, request.url)
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set(
+      "url",
+      request.nextUrl.pathname + request.nextUrl.search
     );
+    return NextResponse.redirect(loginUrl);
   }
 
-  if (session === "valid") {
-    return NextResponse.next();
-  }
-
-  return NextResponse.redirect(
-    new URL(`/login?url=${request.nextUrl.pathname}`, request.url)
-  );
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard", "/dashboard/:path*"],
+  matcher: ["/dashboard/:path*"],
 };

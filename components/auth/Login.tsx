@@ -6,10 +6,10 @@ import { OtpInput } from "./OtpInput";
 
 interface ModalProps {
   setIsOpen?: Dispatch<SetStateAction<boolean>>;
-  callbackurl?: string;
+  redirectToDashboard?: () => void;
 }
 
-function Login({ setIsOpen, callbackurl }: ModalProps) {
+function Login({ setIsOpen, redirectToDashboard }: ModalProps) {
   const [phone, setPhone] = useState<string>("");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
@@ -93,10 +93,10 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
         if (setIsOpen) {
           setIsOpen(false);
         }
-        if (callbackurl){
-          router.push(callbackurl);
+        if (redirectToDashboard) {
+          redirectToDashboard();
         } else {
-          router.push("/dashboard")
+          router.push('/dashboard')
         }
       }
     } catch (err) {

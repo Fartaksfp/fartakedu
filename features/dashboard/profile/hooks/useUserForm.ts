@@ -6,6 +6,7 @@ import { UserInfoForm, userInfoSchema } from "../schema";
 import { getUser } from "@/data-layer/user/getUser";
 import { addUser } from "@/data-layer/user/addUser";
 import { UserInfoPayload } from "@/types/userInfo";
+import { toast } from "react-toastify";
 
 export function useUserForm(refresh: () => void) {
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ export function useUserForm(refresh: () => void) {
     setLoading(true);
     await addUser(payload);
     setLoading(false);
-
+    toast.success("اطلاعات ثبت شد. هم اکنون میتوانید خرید کنید");
     refresh();
   };
 

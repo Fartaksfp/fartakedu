@@ -21,7 +21,7 @@ export default function UserFormFields({
   } = form;
 
   return (
-    <>
+    <div className="flex flex-col md:grid md:grid-cols-2 gap-5">
       <div>
         <label>نام</label>
         <Input
@@ -112,6 +112,6 @@ export default function UserFormFields({
       <Button disabled={loading} type="submit" className="w-full col-span-2">
         {loading ? "در حال ذخیره..." : "ذخیره اطلاعات"}
       </Button>
-    </>
+    </div>
   );
 }
