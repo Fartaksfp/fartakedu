@@ -8,7 +8,6 @@ export default function UserForm({ refresh }: { refresh: () => void }) {
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="grid grid-cols-1 md:grid-cols-2 gap-5"
     >
       <UserFormFields form={form} user={user} loading={loading} />
     </form>
