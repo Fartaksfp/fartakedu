@@ -93,9 +93,9 @@ function Login({ setIsOpen, callbackurl }: ModalProps) {
         if (setIsOpen) {
           setIsOpen(false);
         }
-        console.log(callbackurl);
+        console.log("callbackurl:", callbackurl, typeof callbackurl);
 
-        if (callbackurl) {
+        if (typeof callbackurl === "string" && callbackurl.length > 0) {
           router.replace(callbackurl);
         } else {
           router.replace("/dashboard");
