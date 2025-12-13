@@ -13,10 +13,14 @@ export default function ProfileContent() {
   const course = searchParams.get("course");
 
   const fetchUserData = async () => {
+    console.log(course);
+
     const data = await getUser();
     setUser(data);
-    if (course) {
-      redirect(course);
+    if (data?.first_name) {
+      if (course) {
+        redirect(course);
+      }
     }
   };
 
