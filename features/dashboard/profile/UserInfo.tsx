@@ -13,7 +13,19 @@ function UserInfo({ data }: { data: UserInfoPayload }) {
       <div>
         <label>نام خانوادگی</label>
         <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
-          {data.last_name}
+          {data.last_name ?? "ثبت نشده"}
+        </p>
+      </div>
+      <div>
+        <label>نام (لاتین)</label>
+        <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
+          {data.first_name_en ?? "ثبت نشده"}
+        </p>
+      </div>
+      <div>
+        <label>نام خانوادگی (لاتین)</label>
+        <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
+          {data.last_name_en ?? "ثبت نشده"}
         </p>
       </div>
       <div>
@@ -37,7 +49,13 @@ function UserInfo({ data }: { data: UserInfoPayload }) {
       <div>
         <label>نام شرکت</label>
         <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
-          {data.company_name}
+          {data.company_name ?? "ثبت نشده"}
+        </p>
+      </div>
+      <div>
+        <label>نام شرکت (لاتین)</label>
+        <p className="mt-2 border-2 py-[5px] pr-3 rounded-md border-gray-500">
+          {data.company_name_en ?? "ثبت نشده"}
         </p>
       </div>
       <div>

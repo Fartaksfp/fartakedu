@@ -49,6 +49,32 @@ export default function UserFormFields({
       </div>
 
       <div>
+        <label>نام (لاتین)</label>
+        <Input
+          className="mt-2 border-2 border-gray-500"
+          {...register("first_name_en")}
+        />
+        {errors.first_name_en && (
+          <p className="text-red-500 mt-4 text-sm">
+            {errors.first_name_en.message}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label>نام خانوادگی (لاتین)</label>
+        <Input
+          className="mt-2 border-2 border-gray-500"
+          {...register("last_name_en")}
+        />
+        {errors.last_name_en && (
+          <p className="text-red-500 mt-4 text-sm">
+            {errors.last_name_en.message}
+          </p>
+        )}
+      </div>
+
+      <div>
         <label>سن</label>
         <Input
           className="mt-2 border-2 border-gray-500"
@@ -87,11 +113,20 @@ export default function UserFormFields({
           {...register("company_name")}
         />
       </div>
+      <div>
+        <label>نام شرکت (لاتین)</label>
+        <Input
+          className="mt-2 border-2 border-gray-500"
+          {...register("company_name_en")}
+        />
+      </div>
 
       <div>
         <label htmlFor="signup_model">نوع ثبت نام</label>
-        <select id="signup_model" {...register("signup_model")}
-        className="block w-full dark:bg-black mt-2 dark:text-white appearance-none rounded-lg border border-gray-300 bg-white py-2 px-4 pr-8 text-gray-700 focus:border-blue-500 focus:outline-none  focus:ring-1 focus:ring-blue-500"
+        <select
+          id="signup_model"
+          {...register("signup_model")}
+          className="block w-full dark:bg-black mt-2 dark:text-white appearance-none rounded-lg border border-gray-300 bg-white py-2 px-4 pr-8 text-gray-700 focus:border-blue-500 focus:outline-none  focus:ring-1 focus:ring-blue-500"
         >
           <option value="">انتخاب کنید</option>
           <option value="آزاد">آزاد</option>
