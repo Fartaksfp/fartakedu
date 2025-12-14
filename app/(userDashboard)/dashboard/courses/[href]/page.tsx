@@ -55,7 +55,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
         >
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 border-2 dark:border-gray-500 rounded-xl shadow-lg py-6 lg:py-10 px-4 lg:px-6">
             <div className="lg:col-span-1">
-              <div className="relative w-full h-80 sm:h-80 md:h-96 lg:h-full overflow-hidden rounded-xl">
+              <div className="relative aspect-square overflow-hidden rounded-xl">
                 <Image
                   src={course.image}
                   alt={course.title + " تصویر"}

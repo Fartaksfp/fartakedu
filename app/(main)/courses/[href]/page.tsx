@@ -52,7 +52,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
           }
         >
           <div className="grid mt-10 grid-cols-1 border-2 dark:border-gray-500 gap-6 rounded-xl shadow-lg p-4 lg:grid-cols-3 lg:gap-8 lg:p-6">
-            <div className="lg:col-span-1 h-90 sm:h-110 relative w-full rounded-xl overflow-hidden">
+            <div className="lg:col-span-1 relative w-full rounded-xl overflow-hidden aspect-square">
               <Image
                 src={course.image}
                 alt={course.title + " تصویر"}
