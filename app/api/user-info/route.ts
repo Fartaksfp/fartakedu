@@ -47,9 +47,12 @@ export async function POST(req: Request) {
       user_id,
       first_name,
       last_name,
+      first_name_en,
+      last_name_en,
       age,
       phone,
       company_name,
+      company_name_en,
       national_code,
       signup_model
     } = await req.json();
@@ -64,12 +67,15 @@ export async function POST(req: Request) {
       p_user_id: user_id,
       p_first_name: first_name,
       p_last_name: last_name,
+      p_first_name_en:first_name_en,
+      p_last_name_en:last_name_en,
       p_national_code: finalNationalCode,
       p_age: age,
       p_courses_count: 0,
       p_certificates_count: 0,
       p_phone: phone,
       p_company_name: company_name,
+      p_company_name_en:company_name_en,
       p_signup_model:signup_model,
     });
 

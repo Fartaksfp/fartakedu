@@ -26,7 +26,8 @@ function DashbardHeader() {
         <div className=" items-center space-x-4 hidden md:flex">
           <Themetoggle />
           <Link href={"/dashboard/cart"}>
-            <Button variant="default" size="icon">
+            <Button variant="default">
+              <span>سبد خرید</span>
               <ShoppingBasket className="!w-5 !h-5" />
             </Button>
           </Link>
