@@ -64,7 +64,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
 
             <div className="lg:col-span-2 flex flex-col justify-between space-y-4">
               <h1 className="text-2xl leading-12 sm:text-3xl font-bold">{course.title}</h1>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base whitespace-pre-wrap text-muted-foreground leading-relaxed">
                 {course.description}
               </p>
 

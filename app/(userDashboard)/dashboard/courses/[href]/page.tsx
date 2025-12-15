@@ -74,7 +74,7 @@ async function page({ params }: { params: Promise<{ href: string }> }) {
               </div>
 
               <div>
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                <p className="text-sm sm:text-base whitespace-pre-wrap text-muted-foreground leading-relaxed">
                   {course.description}
                 </p>
               </div>
