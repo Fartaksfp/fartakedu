@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import MainHeader from "@/components/header/MainHeader";
 import Footer from "@/components/footer/Footer";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "پنل آموزشی فرتاک سنجش فناوری پیشرو",
