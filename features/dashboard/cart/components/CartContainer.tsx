@@ -10,7 +10,7 @@ interface CartContainerProps {
   cart: cartType[];
   setCart: React.Dispatch<React.SetStateAction<cartType[]>>;
   onCheckout: () => void;
-  user: UserInfoPayload
+  user: UserInfoPayload;
 }
 
 export function CartContainer({
@@ -18,7 +18,7 @@ export function CartContainer({
   cart,
   setCart,
   onCheckout,
-  user
+  user,
 }: CartContainerProps) {
   return (
     <div className="border rounded-lg p-4 mb-6 shadow-sm">
@@ -33,7 +33,12 @@ export function CartContainer({
         ))}
       </div>
 
-      <CartSummary cartItem={cartItem} onCheckout={onCheckout} user={user} />
+      <CartSummary
+        cartItem={cartItem}
+        setCart={setCart}
+        onCheckout={onCheckout}
+        user={user}
+      />
     </div>
   );
 }

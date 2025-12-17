@@ -53,19 +53,7 @@ export default function CartPage() {
       return;
     }
 
-    let discount_on_cart = 0;
-
-    cartItem.courses.forEach((course) => {
-      if (course.status === "soon") {
-        if (user.signup_model === "مرکز رشد، پیش رشد، کوآپ") {
-          discount_on_cart += (course.price * 80) / 100;
-        } else if (user.signup_model === "شرکت های اراضی و استیجاری") {
-          discount_on_cart += (course.price * 50) / 100;
-        }
-      }
-    });
-
-    SendPayment(cart[0].uuid, user.phone!, cartItem.total - discount_on_cart);
+    SendPayment(cart[0].uuid, user.phone!, cartItem.total);
   };
 
   if (loading) {
