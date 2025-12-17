@@ -104,7 +104,7 @@ export function CartSummary({
     <>
       <hr className="mt-5" />
 
-      <div className="mt-6 flex gap-4 p-4 border rounded-lg">
+      <div className="mt-6 flex flex-col md:flex-row gap-4 p-4 border rounded-lg">
         <p className="text-xl font-bold">
           جمع کل سفارش:
           <span> {baseTotal.toLocaleString()} تومان</span>
