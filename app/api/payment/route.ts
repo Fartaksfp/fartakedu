@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
       redirectUrl: `https://sep.shaparak.ir/OnlinePG/SendToken?token=${data.token}`,
     });
   } else {
+    console.log(data);
     return NextResponse.json({ data }, { status: 500 });
   }
 }
