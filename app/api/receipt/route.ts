@@ -16,6 +16,18 @@ export async function POST(request: NextRequest) {
   if (state === "OK") {
     const resnum = paymentData.ResNum;
 
+    const verifyTransaction = await fetch('https://sep.shaparak.ir/verifyTxnRandomSessionkey/ipg/ReverseTransaction',{
+      method:"POST",
+      headers: { "Content-Type": "application/json" },
+      body:JSON.stringify({
+        "RefNum":resnum,
+        "TerminalNumber": process.env.SEP_TERMINAL_ID
+      })
+    })
+
+    const verifyData = await verifyTransaction.json()
+    console.log(verifyData);
+    
     const { data: updatedCart, error: updateError } = await supabase
       .from("cart")
       .update({ status: "completed", pay: body.Amount })
