@@ -4,12 +4,17 @@
 import React, { useRef } from "react";
 import "./style.css";
 import { useReactToPrint } from "react-to-print";
-// import sign from "../assets/images/signs/allahverdiemza.jpg"
 import Image from "next/image";
+import { UserInfoPayload } from "@/types/userInfo";
+import { courseType } from "@/features/courses/types/course";
+import { toNormalDate } from "@/helper/toNormalDate";
 
-const Certificate = () => {
+const Certificate = ({user, course} : {user: UserInfoPayload, course:courseType}) => {
   const certificateRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef: certificateRef });
+
+  const faDate = toNormalDate('fa', course.created_at)
+  const enDate = toNormalDate('en', course.created_at)
 
   return (
     <>
@@ -79,15 +84,15 @@ const Certificate = () => {
             >
               <p>it is to certify that</p>
               <p style={{ fontSize: "1.875rem", fontFamily: "brush" }}>
-                Mr. Ehsan Omidvar
+                {user.first_name_en}{" "}{user.last_name_en}
               </p>
-              <p>national code 0451383524</p>
-              <p>from Kavosh Maz Daroo</p>
-              <p>has successfully completed 8 hours training course on:</p>
+              <p>national code 0{user.national_code}</p>
+              <p>{user.company_name_en}</p>
+              <p>has successfully completed {course.duration} hours training course on:</p>
               <p style={{ fontSize: "1.5rem", color: "#ef4444" }}>
-                “Winning sales in Iran&apos;s economics”
+                “{course.title_en}”
               </p>
-              <p>held on 04 November 2025</p>
+              <p>held on {enDate}</p>
             </div>
 
             {/* Divider */}
@@ -112,14 +117,14 @@ const Certificate = () => {
               }}
             >
               <p>بدینوسیله گواهی میشود</p>
-              <p style={{ fontSize: "1.25rem" }}>جناب آقای احسان امیدوار</p>
-              <p>با کد ملی 0451383524</p>
-              <p>از شرکت کاوش مازدارو</p>
+              <p style={{ fontSize: "1.25rem" }}>{user.first_name}{" "}{user.last_name}</p>
+              <p>با کد ملی 0{user.national_code}</p>
+              <p>از شرکت {user.company_name}</p>
               <p>دوره آموزشی:</p>
               <p style={{ fontSize: "1.5rem", color: "#ef4444" }}>
-                «فروش برنده در شرایط اقتصادی ایران»
+                «{course.title}»
               </p>
-              <p>را به مدت ساعت در تاریخ 13 آبان ماه 1404</p>
+              <p>را به مدت ساعت در تاریخ {faDate}</p>
               <p>به پایان رسانیده است</p>
             </div>
           </div>
@@ -190,7 +195,7 @@ const Certificate = () => {
                       color: "#1f2937",
                     }}
                   >
-                    عرفان اله وردی
+                    {course.teacher}
                   </p>
                 </div>
               </div>
