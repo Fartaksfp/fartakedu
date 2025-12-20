@@ -4,10 +4,12 @@
 import React, { useRef } from "react";
 import "./style.css";
 import { useReactToPrint } from "react-to-print";
+// import sign from "../assets/images/signs/allahverdiemza.jpg"
+import Image from "next/image";
 
 const Certificate = () => {
   const certificateRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef: certificateRef,});
+  const reactToPrintFn = useReactToPrint({ contentRef: certificateRef });
 
   return (
     <>
@@ -144,46 +146,54 @@ const Certificate = () => {
             >
               <div
                 style={{
-                  height: "6rem",
+                  fontFamily: "mitra",
+                  height: "10rem",
                   width: "10rem",
                   display: "flex",
-                  alignItems: "center",
+                  position: "relative",
+                  alignItems: "flex-end",
                   justifyContent: "flex-start",
                   marginBottom: "0.5rem",
                 }}
               >
-                <img
-                  src="https://placehold.co/150x80?text=Signature+1"
+                <Image
+                  src="/images/signs/allahverdiemza.jpg"
                   alt="امضا مدرس"
+                  width={250}
+                  height={250}
                   style={{
                     mixBlendMode: "multiply",
-                    objectFit: "contain",
+                    objectFit: "cover",
                     maxHeight: "100%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
                   }}
                 />
+                <div style={{
+                  width:"100%",
+                  textAlign:"center",
+                }}>
+                  <p
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "700",
+                      color: "#4b5563",
+                    }}
+                  >
+                    مدرس دوره
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: "700",
+                      fontSize: "1.125rem",
+                      color: "#1f2937",
+                    }}
+                  >
+                    عرفان اله وردی
+                  </p>
+                </div>
               </div>
-              <p
-                style={{
-                  fontWeight: "700",
-                  fontSize: "1.125rem",
-                  color: "#1f2937",
-                }}
-              >
-                عرفان اله وردی
-              </p>
-              <p style={{ fontSize: "0.875rem", color: "#4b5563" }}>
-                مدرس دوره
-              </p>
-              <p
-                style={{
-                  fontSize: "0.75rem",
-                  color: "#9ca3af",
-                  fontFamily: "serif",
-                  marginTop: "0.25rem",
-                }}
-              >
-                Course Instructor
-              </p>
             </div>
 
             {/* Manager Stamp */}
