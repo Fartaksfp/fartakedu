@@ -14,15 +14,14 @@ export async function POST(request: NextRequest) {
   const state = String(paymentData.State);
 
   if (state === "OK") {
-    
     const resnum = paymentData.ResNum;
 
-    const { data: updatedCart, error: updateError } = await (await supabase)
+    const { data: updatedCart, error: updateError } = await supabase
       .from("cart")
-      .update({ status: "completed" })
+      .update({ status: "completed", pay: body.Amount })
       .eq("uuid", resnum)
       .select();
-    
+
     if (updateError) {
       console.error(updateError);
       return;
