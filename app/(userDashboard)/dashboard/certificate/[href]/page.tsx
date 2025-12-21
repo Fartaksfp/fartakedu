@@ -1,4 +1,5 @@
 import Certificate from "@/components/certificate/Certificate";
+import { saveCertificate } from "@/data-layer/certificate/saveCertificate";
 import { getCourse } from "@/data-layer/course/getCourse";
 import { getUser } from "@/data-layer/user/getUser";
 import { getUserCourses } from "@/data-layer/user/getUserCourses";
@@ -13,16 +14,23 @@ export default async function page({
   const course = await getCourse(href);
   const user = await getUser();
   const userCourses = await getUserCourses();
-
-  //   console.log(course);
-  //   console.log(userCourses);
   const courseid = course.coursesdata.id;
+  const certificateId = await saveCertificate({
+    course_id: courseid,
+    user_id: user.id,
+  });
 
   for (let i = 0; i < userCourses.length; i++) {
     const userCourse = userCourses[i];
 
     if (userCourse.courses.id === courseid) {
-      return <Certificate user={user} course={course.coursesdata} />;
+      return (
+        <Certificate
+          user={user}
+          course={course.coursesdata}
+          id={certificateId}
+        />
+      );
     }
   }
 

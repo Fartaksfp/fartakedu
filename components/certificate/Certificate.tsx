@@ -9,12 +9,20 @@ import { UserInfoPayload } from "@/types/userInfo";
 import { courseType } from "@/features/courses/types/course";
 import { toNormalDate } from "@/helper/toNormalDate";
 
-const Certificate = ({user, course} : {user: UserInfoPayload, course:courseType}) => {
+const Certificate = ({
+  user,
+  course,
+  id,
+}: {
+  user: UserInfoPayload;
+  course: courseType;
+  id: string;
+}) => {
   const certificateRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef: certificateRef });
 
-  const faDate = toNormalDate('fa', course.created_at)
-  const enDate = toNormalDate('en', course.created_at)
+  const faDate = toNormalDate("fa", course.created_at);
+  const enDate = toNormalDate("en", course.created_at);
 
   return (
     <>
@@ -84,11 +92,14 @@ const Certificate = ({user, course} : {user: UserInfoPayload, course:courseType}
             >
               <p>it is to certify that</p>
               <p style={{ fontSize: "1.875rem", fontFamily: "brush" }}>
-                {user.first_name_en}{" "}{user.last_name_en}
+                {user.first_name_en} {user.last_name_en}
               </p>
               <p>national code 0{user.national_code}</p>
               <p>{user.company_name_en}</p>
-              <p>has successfully completed {course.duration} hours training course on:</p>
+              <p>
+                has successfully completed {course.duration} hours training
+                course on:
+              </p>
               <p style={{ fontSize: "1.5rem", color: "#ef4444" }}>
                 “{course.title_en}”
               </p>
@@ -117,7 +128,9 @@ const Certificate = ({user, course} : {user: UserInfoPayload, course:courseType}
               }}
             >
               <p>بدینوسیله گواهی میشود</p>
-              <p style={{ fontSize: "1.25rem" }}>{user.first_name}{" "}{user.last_name}</p>
+              <p style={{ fontSize: "1.25rem" }}>
+                {user.first_name} {user.last_name}
+              </p>
               <p>با کد ملی 0{user.national_code}</p>
               <p>از شرکت {user.company_name}</p>
               <p>دوره آموزشی:</p>
@@ -175,10 +188,12 @@ const Certificate = ({user, course} : {user: UserInfoPayload, course:courseType}
                     left: 0,
                   }}
                 />
-                <div style={{
-                  width:"100%",
-                  textAlign:"center",
-                }}>
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                  }}
+                >
                   <p
                     style={{
                       fontSize: "1rem",
@@ -239,6 +254,7 @@ const Certificate = ({user, course} : {user: UserInfoPayload, course:courseType}
           <div
             style={{
               textAlign: "center",
+              fontFamily: "mitra",
               borderTop: "1px solid #d1d5db",
               paddingTop: "1rem",
             }}
@@ -247,13 +263,12 @@ const Certificate = ({user, course} : {user: UserInfoPayload, course:courseType}
               شماره گواهینامه:{" "}
               <span
                 style={{
-                  fontFamily: "monospace",
-                  direction: "ltr",
+                  direction: "rtl",
                   display: "inline-block",
                   fontWeight: "700",
                 }}
               >
-                ف ۱۰۰۵ / ۴۰۴۶
+                ف {id} / {course.id.split('-')[0]}
               </span>
             </p>
           </div>
