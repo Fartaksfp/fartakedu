@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "mitra";
+  src: url("/fonts/mitra/bmitra.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "brush";
+  src: url("/fonts/brush/Brush.otf");
+  font-weight: 400;
+}
+
+@media print {
+  @page {
+    size: 270mm 220mm;
+  }
+}
