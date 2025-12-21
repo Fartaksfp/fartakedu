@@ -11,6 +11,7 @@ import { Menu } from "lucide-react";
 import React from "react";
 import SidebarItem from "./SidebarItem";
 import { navbarItems } from "@/static/dashboardNavbarItems";
+import ExitButton from "./ExitButton";
 
 function SidebarMobile() {
   return (
@@ -33,6 +34,9 @@ function SidebarMobile() {
                     <SidebarItem item={Item} />
                   </SheetClose>
                 ))}
+                <SheetClose>
+                  <ExitButton item={{ name: "خروچ", icon: "door-open" }} />
+                </SheetClose>
               </div>
             </div>
           </div>
