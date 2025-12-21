@@ -5,6 +5,7 @@ export interface UserInfoPayload {
   first_name_en: string;
   last_name_en: string;
   age: number;
+  gender:string;
   national_code: number;
   company_name?: string;
   company_name_en?: string;

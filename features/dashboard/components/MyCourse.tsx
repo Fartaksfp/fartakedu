@@ -37,7 +37,9 @@ export default function MyCourse({ item }: { item: UserCourse }) {
         </div>
       </div>
       <div className="flex gap-5">
+        <Link href={`/dashboard/certificate/${item.courses.href}`}>
         <Button>دریافت گوهینامه</Button>
+        </Link>
         <Button>دریافت لایسنس</Button>
       </div>
     </div>

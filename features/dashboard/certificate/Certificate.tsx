@@ -8,6 +8,7 @@ import Image from "next/image";
 import { UserInfoPayload } from "@/types/userInfo";
 import { courseType } from "@/features/courses/types/course";
 import { toNormalDate } from "@/helper/toNormalDate";
+import { Button } from "@/components/ui/button";
 
 const Certificate = ({
   user,
@@ -26,10 +27,10 @@ const Certificate = ({
 
   return (
     <>
-      <button onClick={reactToPrintFn}>Print</button>
+      <Button onClick={reactToPrintFn} className="mb-5">دانلود گواهینامه</Button>
       <div
         style={{
-          width: "62.5rem", // w-250
+          width: "63.5rem", // w-250
           backgroundColor: "#ffffff",
           borderWidth: "10px",
           borderStyle: "double",
@@ -92,10 +93,10 @@ const Certificate = ({
             >
               <p>it is to certify that</p>
               <p style={{ fontSize: "1.875rem", fontFamily: "brush" }}>
-                {user.first_name_en} {user.last_name_en}
+                {user.gender === "man" ? "Mr. " : "Mrs. "}{user.first_name_en} {user.last_name_en}
               </p>
               <p>national code {user.national_code}</p>
-              <p>{user.company_name_en}</p>
+              <p>from {user.company_name_en}</p>
               <p>
                 has successfully completed {course.duration} hours training
                 course on:
@@ -129,7 +130,7 @@ const Certificate = ({
             >
               <p>بدینوسیله گواهی میشود</p>
               <p style={{ fontSize: "1.25rem" }}>
-                {user.first_name} {user.last_name}
+                {user.gender === "man" ? "جناب آقای" : "سرکار خانم"} {user.first_name} {user.last_name}
               </p>
               <p>با کد ملی {user.national_code}</p>
               <p>از شرکت {user.company_name}</p>
@@ -175,7 +176,7 @@ const Certificate = ({
                 }}
               >
                 <Image
-                  src="/images/signs/allahverdiemza.jpg"
+                  src={`/images/courses/signs/${course.sign_href}.jpg`}
                   alt="امضا مدرس"
                   width={250}
                   height={250}
@@ -238,7 +239,7 @@ const Certificate = ({
                 }}
               >
                 <img
-                  src={`/images/courses/signs/${course.sign_href}.jpg`}
+                  src={`/images/cert/emzapark.jpg`}
                   alt="امضا مدیر"
                   style={{
                     mixBlendMode: "multiply",
