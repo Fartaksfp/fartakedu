@@ -1,8 +1,8 @@
-import Certificate from "@/components/certificate/Certificate";
 import { saveCertificate } from "@/data-layer/cart/saveCertificate";
 import { getCourse } from "@/data-layer/course/getCourse";
 import { getUser } from "@/data-layer/user/getUser";
 import { getUserCourses } from "@/data-layer/user/getUserCourses";
+import Certificate from "@/features/dashboard/certificate/Certificate";
 import React from "react";
 
 export default async function page({

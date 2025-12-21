@@ -1,6 +1,7 @@
 export interface courseType {
   id: string;
   title: string;
+  title_en:string;
   description: string;
   teacher: string;
   image: string;
@@ -10,4 +11,5 @@ export interface courseType {
   students: number;
   duration: number;
   href: string;
+  sign_href:string;
 }
