@@ -1,6 +1,7 @@
 import React from "react";
 import SidebarItem from "./SidebarItem";
 import { navbarItems } from "@/static/dashboardNavbarItems";
+import ExitButton from "./ExitButton";
 
 function DashboardSidebar() {
   return (
@@ -10,6 +11,7 @@ function DashboardSidebar() {
           {navbarItems.map((Item, index) => (
             <SidebarItem item={Item} key={index} />
           ))}
+          <ExitButton item={{ name: "خروچ", icon: "door-open" }}/>
         </div>
       </div>
     </div>
