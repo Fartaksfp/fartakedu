@@ -5,7 +5,7 @@ export default async function Page() {
   const userCourses = await getUserCourses();
 
   return (
-    <div className="flex flex-col md:flex-row w-full">
+    <div className="flex flex-col gap-5 w-full">
       {userCourses.map((item) => (
         <MyCourse key={item.id} item={item} />
       ))}

@@ -138,7 +138,7 @@ const Certificate = ({
               <p style={{ fontSize: "1.5rem", color: "#ef4444" }}>
                 «{course.title}»
               </p>
-              <p>را به مدت ساعت در تاریخ {faDate}</p>
+              <p>را به مدت {course.duration} ساعت در تاریخ {faDate}</p>
               <p>به پایان رسانیده است</p>
             </div>
           </div>
