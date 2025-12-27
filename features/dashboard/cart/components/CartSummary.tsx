@@ -30,6 +30,7 @@ export function CartSummary({
   const statusColor =
     STATUS_COLORS[cartItem.status as keyof typeof STATUS_COLORS] ||
     "text-gray-600";
+
   const statusText =
     STATUS_TEXT[cartItem.status as keyof typeof STATUS_TEXT] || cartItem.status;
 
@@ -69,35 +70,34 @@ export function CartSummary({
     setDiscountMessage(`کد تخفیف ${result.discount.value}% اعمال شد`);
   };
 
-  let discountByCodeTotal = 0;
-
-  if (cartItem.courses && discountPercent > 0) {
-    cartItem.courses.forEach((course) => {
-      discountByCodeTotal += (course.price * discountPercent) / 100;
-    });
-  }
-
   const baseTotal =
     cartItem.courses?.reduce((sum, course) => sum + course.price, 0) ?? 0;
 
-  const priceAfterDiscounts =
-    baseTotal - orgDiscountTotal - discountByCodeTotal;
+  const priceAfterOrgDiscount = Math.max(baseTotal - orgDiscountTotal, 0);
+
+  const discountByCodeTotal =
+    discountPercent > 0
+      ? Math.min(
+          (priceAfterOrgDiscount * discountPercent) / 100,
+          priceAfterOrgDiscount
+        )
+      : 0;
+
+  const priceAfterDiscounts = Math.max(
+    priceAfterOrgDiscount - discountByCodeTotal,
+    0
+  );
 
   const taxAmount = withTax ? (priceAfterDiscounts * 10) / 100 : 0;
+
   const finalPrice = priceAfterDiscounts + taxAmount;
 
   useEffect(() => {
-    setCart((prev) => {
-      const updatedCart = prev.map((item) =>
-        item.uuid === cartItem.uuid
-          ? {
-              ...item,
-              total: finalPrice, // فقط آپدیت total
-            }
-          : item
-      );
-      return updatedCart;
-    });
+    setCart((prev) =>
+      prev.map((item) =>
+        item.uuid === cartItem.uuid ? { ...item, total: finalPrice } : item
+      )
+    );
   }, [finalPrice, cartItem.uuid, setCart]);
 
   return (
@@ -141,7 +141,7 @@ export function CartSummary({
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-2 mt-3">
+      <div className="flex flex-col md:flex-row gap-2 mt-3 items-center">
         <p>کد تخفیف:</p>
         <input
           ref={discountInput}
