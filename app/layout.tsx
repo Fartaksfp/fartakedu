@@ -1,6 +1,6 @@
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { Bounce, ToastContainer } from 'react-toastify';
+import { Bounce, ToastContainer } from "react-toastify";
 
 export default function RootLayout({
   children,
@@ -9,6 +9,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" suppressHydrationWarning>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="0SR8lpb7O025Li7OAw5XAZtpQWkHSLBBxaPBQrCYN58"
+        />
+      </head>
       <body>
         <ThemeProvider attribute={"class"} defaultTheme="light">
           {children}
@@ -25,7 +31,7 @@ export default function RootLayout({
           pauseOnHover
           theme="colored"
           transition={Bounce}
-          />
+        />
       </body>
     </html>
   );
