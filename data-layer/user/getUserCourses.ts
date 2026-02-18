@@ -17,6 +17,7 @@ export type UserCourse = {
     duration: number;
     href:string;
     status: string;
+    spot_license: string;
   };
 };
 
