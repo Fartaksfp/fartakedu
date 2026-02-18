@@ -15,7 +15,7 @@ export async function getCourseLisence(spot_id: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      test: true,
+      test: false,
       course: [spot_id],
       name: "customer",
       watermark: { texts: [{ text: phone }] },
