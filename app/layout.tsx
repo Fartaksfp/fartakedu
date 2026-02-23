@@ -1,3 +1,4 @@
+import ClarityInit from "@/components/shared/Clarity";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Bounce, ToastContainer } from "react-toastify";
@@ -17,6 +18,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider attribute={"class"} defaultTheme="light">
+          <ClarityInit />
           {children}
         </ThemeProvider>
         <ToastContainer
