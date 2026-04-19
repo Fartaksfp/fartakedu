@@ -1,5 +1,7 @@
 "use server";
-import { supabase } from "@/utils/supabase/client";
+
+
+import { db } from "@/utils/db";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
@@ -8,6 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 export async function getUser() {
   const cookieStore = await cookies();
   const tokenCookie = cookieStore.get("authtoken");
+
   const token = tokenCookie?.value
     ? decodeURIComponent(tokenCookie.value)
     : undefined;
@@ -20,12 +23,14 @@ export async function getUser() {
   const data = await jwtVerify(token, encoder.encode(JWT_SECRET));
 
   const userId = data.payload.user_id;
+
   try {
-    const { data: user } = await supabase
-      .from("users_info")
-      .select("*")
-      .eq("user_id", userId)
-      .maybeSingle();
+    const result = await db.query(
+      "SELECT * FROM users_info WHERE user_id = $1 LIMIT 1",
+      [userId]
+    );
+
+    const user = result.rows[0];
 
     if (user) {
       return user;

@@ -1,17 +1,22 @@
-import { supabase } from "@/utils/supabase/client";
 import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/utils/db";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  const { data, error } = await supabase.rpc("remove_from_cart", {
-    p_cart_id: body.cartId,
-    p_course_id: body.courseId,
-  });
+    const result = await db.query(
+      `
+      SELECT remove_from_cart($1, $2) AS data
+      `,
+      [body.cartId, body.courseId]
+    );
 
-  if (error) {
-    return NextResponse.json({ message: "failed" }, { status: 500 });
-  } else {
-    return NextResponse.json(data);
+    return NextResponse.json(result.rows[0]?.data);
+  } catch {
+    return NextResponse.json(
+      { message: "failed" },
+      { status: 500 }
+    );
   }
 }

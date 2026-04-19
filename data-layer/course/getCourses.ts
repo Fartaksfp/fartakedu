@@ -1,17 +1,25 @@
-import { supabase } from "@/utils/supabase/client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use server";
+
+import { db } from "@/utils/db";
 
 export async function getCourses(limit?: number) {
-  const { data, error } = await supabase.rpc(
-    "get_all_courses",
-    limit ? { p_limit: limit } : {},
-  );
+  try {
+    const result = await db.query(
+      `
+      SELECT get_all_courses($1) AS data
+      `,
+      [limit ?? null],
+    );
 
-  if (error) {
-    return { error: error.message, status: 500 };
+    return {
+      coursesdata: result.rows[0]?.data ?? [],
+      status: 200,
+    };
+  } catch (error: any) {
+    return {
+      error: error.message,
+      status: 500,
+    };
   }
-
-  return {
-    coursesdata: data ?? [],
-    status: 200,
-  };
 }

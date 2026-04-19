@@ -6,7 +6,6 @@ export const metadata = {
   description: "صفحه دوره‌های من در پنل کاربری",
 };
 
-
 export default async function Page() {
   const userCourses = await getUserCourses();
 

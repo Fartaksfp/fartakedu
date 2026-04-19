@@ -1,7 +1,8 @@
 "use server";
+
+import { db } from "@/utils/db";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { supabase } from "@/utils/supabase/client";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
@@ -15,7 +16,7 @@ export type UserCourse = {
     thumbnail_url: string;
     teacher: string;
     duration: number;
-    href:string;
+    href: string;
     status: string;
     spot_license: string;
   };
@@ -24,6 +25,7 @@ export type UserCourse = {
 export async function getUserCourses(): Promise<UserCourse[]> {
   const cookieStore = await cookies();
   const tokenCookie = cookieStore.get("authtoken");
+
   const token = tokenCookie?.value
     ? decodeURIComponent(tokenCookie.value)
     : undefined;
@@ -34,12 +36,35 @@ export async function getUserCourses(): Promise<UserCourse[]> {
 
   const encoder = new TextEncoder();
   const data = await jwtVerify(token, encoder.encode(JWT_SECRET));
+
   const userId = data.payload.user_id;
 
-  const { data: userCourses } = await supabase
-    .from("enrollments")
-    .select("*,courses(*)")
-    .eq("user_id", userId);
+  try {
+    const result = await db.query(
+      `
+      SELECT 
+        e.id,
+        e.progress,
+        e.enrolled_at,
+        json_build_object(
+          'id', c.id,
+          'title', c.title,
+          'thumbnail_url', c.thumbnail_url,
+          'teacher', c.teacher,
+          'duration', c.duration,
+          'href', c.href,
+          'status', c.status,
+          'spot_license', c.spot_license
+        ) AS courses
+      FROM enrollments e
+      JOIN courses c ON c.id = e.course_id
+      WHERE e.user_id = $1
+      `,
+      [userId]
+    );
 
-  return userCourses ?? [];
+    return result.rows;
+  } catch {
+    return [];
+  }
 }

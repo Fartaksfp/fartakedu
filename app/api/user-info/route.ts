@@ -1,5 +1,6 @@
-import { supabase } from "@/utils/supabase/client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
+import { db } from "@/utils/db";
 
 export async function GET(req: Request) {
   try {
@@ -13,16 +14,14 @@ export async function GET(req: Request) {
       );
     }
 
-    const { data, error } = await supabase.rpc("get_user_info", {
-      p_user_id: user_id,
-    });
+    const result = await db.query(
+      `
+      SELECT get_user_info($1) AS data
+      `,
+      [user_id]
+    );
 
-    if (error) {
-      return NextResponse.json(
-        { success: false, message: error.message },
-        { status: 500 }
-      );
-    }
+    const data = result.rows[0]?.data;
 
     if (!data) {
       return NextResponse.json(
@@ -31,8 +30,10 @@ export async function GET(req: Request) {
       );
     }
 
-    return NextResponse.json({ success: true, user: data }, { status: 200 });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return NextResponse.json(
+      { success: true, user: data },
+      { status: 200 }
+    );
   } catch (error: any) {
     return NextResponse.json(
       { success: false, message: error.message || "Internal Server Error" },
@@ -43,61 +44,44 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const {
-      user_id,
-      first_name,
-      last_name,
-      first_name_en,
-      last_name_en,
-      age,
-      phone,
-      company_name,
-      company_name_en,
-      national_code,
-      signup_model
-    } = await req.json();
+    const body = await req.json();
 
-    let finalNationalCode = national_code;
+    let finalNationalCode = body.national_code;
 
-    if (national_code.length < 10) {
-      finalNationalCode = national_code.padStart(10, "0");
+    if (finalNationalCode.length < 10) {
+      finalNationalCode = finalNationalCode.padStart(10, "0");
     }
 
-    const { data, error } = await supabase.rpc("insert_user_info", {
-      p_user_id: user_id,
-      p_first_name: first_name,
-      p_last_name: last_name,
-      p_first_name_en:first_name_en,
-      p_last_name_en:last_name_en,
-      p_national_code: finalNationalCode,
-      p_age: age,
-      p_courses_count: 0,
-      p_certificates_count: 0,
-      p_phone: phone,
-      p_company_name: company_name,
-      p_company_name_en:company_name_en,
-      p_signup_model:signup_model,
-    });
+    const result = await db.query(
+      `
+      SELECT insert_user_info(
+        $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13
+      ) AS data
+      `,
+      [
+        body.user_id,
+        body.first_name,
+        body.last_name,
+        body.first_name_en,
+        body.last_name_en,
+        body.age,
+        0,
+        0,
+        body.phone,
+        body.company_name,
+        body.company_name_en,
+        finalNationalCode,
+        body.signup_model,
+      ]
+    );
 
-    if (error) {
-      if (error.code === "23505") {
-        return NextResponse.json(
-          { success: false, message: "کاربر تکراری" },
-          { status: 500 }
-        );
-      }
-      return NextResponse.json(
-        { success: false, message: error },
-        { status: 500 }
-      );
-    }
-
-    const res = data;
-
-    return NextResponse.json({ res }, { status: 200 });
-  } catch (error) {
     return NextResponse.json(
-      { success: false, message: error },
+      { res: result.rows[0]?.data },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    return NextResponse.json(
+      { success: false, message: error.message },
       { status: 500 }
     );
   }

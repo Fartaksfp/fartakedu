@@ -1,5 +1,6 @@
-import { supabase } from "@/utils/supabase/client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
+import { db } from "@/utils/db";
 
 export async function POST(req: Request) {
   try {
@@ -8,7 +9,7 @@ export async function POST(req: Request) {
     if (!phone_e164) {
       return NextResponse.json(
         { error: "Phone Number Not Send!" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -18,41 +19,41 @@ export async function POST(req: Request) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to: phone_e164 }),
-      },
+      }
     );
 
     const result = await melipayamakRes.json();
 
     if (!melipayamakRes.ok) {
-      return NextResponse.json({ error: "Provider Error!" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Provider Error!" },
+        { status: 500 }
+      );
     }
 
     const otp_code = result.code;
 
     if (!otp_code) {
-      return NextResponse.json({ error: "Provider Error" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Provider Error" },
+        { status: 500 }
+      );
     }
 
     const expires_in = "2 minutes";
 
-    const { error } = await supabase.rpc("create_otp", {
-      phone_e164,
-      otp_code,
-      expires_in: expires_in,
-    });
-
-    if (error) {
-      console.error("Supabase Error:", error.message);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+    await db.query(
+      `
+      SELECT create_otp($1, $2, $3)
+      `,
+      [phone_e164, otp_code, expires_in]
+    );
 
     return NextResponse.json({ success: "true" });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    console.error("Server Error:", error);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

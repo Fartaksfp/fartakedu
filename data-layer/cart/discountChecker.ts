@@ -1,21 +1,34 @@
-import { supabase } from "@/utils/supabase/client";
+"use server";
+
+import { db } from "@/utils/db";
 
 export async function discountChecker(code: string) {
-  const { data, error } = await supabase
-    .from("discount")
-    .select("*")
-    .eq("name", code)
-    .single();
+  try {
+    const result = await db.query(
+      `
+      SELECT *
+      FROM discount
+      WHERE name = $1
+      LIMIT 1
+      `,
+      [code],
+    );
 
-  if (error || !data) {
+    if (result.rows.length === 0) {
+      return {
+        valid: false,
+        message: "not valid",
+      };
+    }
+
+    return {
+      valid: true,
+      discount: result.rows[0],
+    };
+  } catch {
     return {
       valid: false,
       message: "not valid",
     };
   }
-
-  return {
-    valid: true,
-    discount: data,
-  };
 }

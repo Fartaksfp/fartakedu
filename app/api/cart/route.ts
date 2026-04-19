@@ -1,4 +1,5 @@
-import { supabase } from "@/utils/supabase/client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { db } from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -13,16 +14,14 @@ export async function GET(req: Request) {
       );
     }
 
-    const { data, error } = await supabase.rpc("get_pending_cart", {
-      p_user_id: user_id,
-    });
+    const result = await db.query(
+      `
+      SELECT get_pending_cart($1) AS data
+      `,
+      [user_id],
+    );
 
-    if (error) {
-      return NextResponse.json(
-        { success: false, message: error.message },
-        { status: 500 },
-      );
-    }
+    const data = result.rows[0]?.data;
 
     if (!data) {
       return NextResponse.json(
@@ -32,7 +31,6 @@ export async function GET(req: Request) {
     }
 
     return NextResponse.json({ success: true, res: data }, { status: 200 });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return NextResponse.json(
       { success: false, message: error.message || "Internal Server Error" },
@@ -42,16 +40,18 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  const { error } = await supabase.rpc("add_to_cart", {
-    p_course_id: body.course,
-    p_user_id: body.userId,
-  });
+    await db.query(
+      `
+      SELECT add_to_cart($1, $2)
+      `,
+      [body.userId, body.course],
+    );
 
-  if (error) {
-    return NextResponse.json({ message: "failed" }, { status: 500 });
-  } else {
     return NextResponse.json({ message: "success" }, { status: 200 });
+  } catch {
+    return NextResponse.json({ message: "failed" }, { status: 500 });
   }
 }
