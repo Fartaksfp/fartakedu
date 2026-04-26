@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       TerminalId: process.env.SEP_TERMINAL_ID,
       Amount: Number(body.amount + '0'),
       ResNum: body.resNumber,
-      RedirectUrl: "https://academy.fartaksfp.com/api/receipt",
+      RedirectUrl: "https://fartakac.runflare.run/api/receipt",
       CellNumber: body.phoneNumber,
     }),
   });
