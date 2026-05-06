@@ -39,20 +39,23 @@ export default function PaymentCard() {
 
   useEffect(() => {
     document.title = "نتیجه پرداخت | پنل کاربری";
+  
     const cookie = document.cookie
       .split("; ")
       .find((row) => row.startsWith("payment="));
+  
     if (cookie) {
       const value = decodeURIComponent(cookie.split("=")[1]);
-      setPaymentData(JSON.parse(value));
+      const parsed = JSON.parse(value);
+      setPaymentData(parsed);
+  
+      if (parsed.State === "OK") {
+        fetch("/api/send-sms", {
+          method: "POST",
+        });
+      }
     }
-
-    if (parsed.State === "OK") {
-      fetch("/api/send-sms", {
-        method: "POST",
-      });
-    }
-    
+  
     fetch("/api/rvp");
   }, []);
 
