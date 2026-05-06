@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getUser } from "@/app/actions/getUser";
+import { getUser } from "@/data-layer/user/getUser";
 
 export async function POST(req: NextRequest) {
   try {
