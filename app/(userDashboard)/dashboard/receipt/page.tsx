@@ -46,6 +46,13 @@ export default function PaymentCard() {
       const value = decodeURIComponent(cookie.split("=")[1]);
       setPaymentData(JSON.parse(value));
     }
+
+    if (parsed.State === "OK") {
+      fetch("/api/send-sms", {
+        method: "POST",
+      });
+    }
+    
     fetch("/api/rvp");
   }, []);
 
