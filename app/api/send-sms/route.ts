@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     const user = await getUser();
 
     if (!user) {
-      return NextResponse.json({ ok: false });
+      return NextResponse.json({ ok: false, error: "User not found" });
     }
 
     const message = `
@@ -16,23 +16,43 @@ export async function POST(req: NextRequest) {
 شماره: ${user.phone}
     `;
 
-    await fetch("http://api.payamak-panel.com/post/Send.asmx/SendSms", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: process.env.SMS_USERNAME,
-        password: process.env.SMS_PASSWORD,
-        from: "50002710054072",
-        to: "09964233305",
-        text: message,
-      }),
+    const params = new URLSearchParams({
+      username: process.env.SMS_USERNAME || "",
+      password: process.env.SMS_PASSWORD || "",
+      to: "09964233305",
+      from: "50002710054072",
+      text: message,
+      isflash: "false",
     });
 
-    return NextResponse.json({ ok: true });
+    const url = `http://api.payamak-panel.com/post/Send.asmx/SendSimpleSMS2?${params.toString()}`;
+
+    const res = await fetch(url, {
+      method: "POST", 
+    });
+
+    const rawResponse = await res.text();
+
+    console.log("SMS API RAW RESPONSE:\n", rawResponse);
+
+    const match = rawResponse.match(
+      /<string[^>]*>(.*?)<\/string>/
+    );
+
+    const smsResult = match ? match[1] : null;
+
+    console.log("Parsed SMS Result:", smsResult);
+
+    return NextResponse.json({
+      ok: true,
+      smsResult,
+    });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ ok: false });
+    console.error("SMS ERROR:", err);
+
+    return NextResponse.json({
+      ok: false,
+      error: "SMS send failed",
+    });
   }
 }
