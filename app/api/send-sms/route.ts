@@ -14,11 +14,12 @@ export async function POST(req: NextRequest) {
 نام: ${user.first_name ?? "-"}
 نام خانوادگی: ${user.last_name ?? "-"}
 شماره: ${user.phone}
+لغو11
     `;
 
     const body = {
       from: "50002710054072",
-      to: "09964233305",
+      to: "9964233305",
       text: message,
     };
 
