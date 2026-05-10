@@ -16,32 +16,26 @@ export async function POST(req: NextRequest) {
 شماره: ${user.phone}
     `;
 
-    const params = new URLSearchParams({
-      username: process.env.SMS_USERNAME || "",
-      password: process.env.SMS_PASSWORD || "",
-      to: "09964233305",
+    const body = {
       from: "50002710054072",
+      to: "09964233305",
       text: message,
-      isflash: "false",
-    });
+    };
 
-    const url = `http://api.payamak-panel.com/post/Send.asmx/SendSimpleSMS2?${params.toString()}`;
+    const url =
+      "https://console.melipayamak.com/api/send/simple/cb07ad5993544e21a3dced484ec43ca5";
 
     const res = await fetch(url, {
-      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(body),
     });
 
-    const rawResponse = await res.text();
+    const Response = await res.json();
 
-    console.log("SMS API RAW RESPONSE:\n", rawResponse);
-
-    const match = rawResponse.match(
-      /<string[^>]*>(.*?)<\/string>/
-    );
-
-    const smsResult = match ? match[1] : null;
-
-    console.log("Parsed SMS Result:", smsResult);
+    console.log("SMS API RESPONSE:\n", Response);
 
     return NextResponse.json({
       ok: true,
