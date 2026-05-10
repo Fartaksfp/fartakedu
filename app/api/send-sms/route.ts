@@ -38,8 +38,7 @@ export async function POST(req: NextRequest) {
     console.log("SMS API RESPONSE:\n", Response);
 
     return NextResponse.json({
-      ok: true,
-      smsResult,
+      ok: true
     });
   } catch (err) {
     console.error("SMS ERROR:", err);
